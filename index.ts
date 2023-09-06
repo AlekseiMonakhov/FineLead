@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import urlRoutes from './routes/urlRoute';
-import { createTables } from './db/createTables';
+import pool from './db/dbConfig';
 
 dotenv.config();
 
@@ -10,17 +10,19 @@ const app: Express = express();
 const corsOptions = {
   origin: true,
   credentials: true,
-}
+};
 app.use(cors(corsOptions));
 app.use('/api/v1', urlRoutes);
-const port = process.env.PORT;
-const host = process.env.HOST;
+const port = process.env.SERVER_PORT;
+const host = process.env.SERVER_HOST;
 
 app.listen(port, async () => {
   console.log(`⚡️[server]: Server is running at http://${host}:${port}`);
   try {
-    await createTables();
+    const client = await pool.connect();
+    client.release();
+    console.log('Соединение с базой данных установлено.');
   } catch (error) {
-    console.error('Ошибка при создании таблиц:', error);
+    console.error('Ошибка при установлении соединения с базой данных:', error);
   }
 });
