@@ -1,8 +1,8 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import urlRoutes from './routes/urlRoute';
-import pool from './db/dbConfig';
+import urlRoutes from './infrastructure/routes/urlRoute';
+import pool from './infrastructure/db/config/dbConfig';
 
 dotenv.config();
 
