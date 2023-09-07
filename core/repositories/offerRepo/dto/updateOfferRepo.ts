@@ -1,9 +1,7 @@
-export class Offer {
+export class UpdateOfferDto {
     constructor(
-        readonly id: number,
         readonly clientId: number,
         readonly url: string,
         readonly clickCost: number,
-    )
-    {}
+    ) {}    
 }
