@@ -1,8 +1,8 @@
 import { Offer } from "../../models/Offer";
-import { AddOfferDto } from "./dto/addOfferRepo";
-import { UpdateOfferDto } from "./dto/updateOfferRepo";
+import { AddOfferDto } from "./dto/addOfferDto";
+import { UpdateOfferDto } from "./dto/updateOfferDto";
 
-export interface OfferRepo {
+export interface OfferRepository {
     add(dto: AddOfferDto): Offer
     getById(id: number): Offer
     getByClientId(clientId: number): Offer
