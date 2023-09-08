@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import offerRoutes from './infrastructure/routes/offerRoute/offerRoute';
+import offerRouter from './infrastructure/routes/offerRoute/offerRoute';
 import pool from './infrastructure/db/config/dbConfig';
 
 dotenv.config();
@@ -12,7 +12,7 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
-app.use('/api/v1', offerRoutes);
+app.use('/api/v1', offerRouter);
 const port = process.env.SERVER_PORT;
 const host = process.env.SERVER_HOST;
 
