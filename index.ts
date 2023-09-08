@@ -12,6 +12,7 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+app.use(express.json());
 app.use('/api/v1', offerRouter);
 const port = process.env.SERVER_PORT;
 const host = process.env.SERVER_HOST;

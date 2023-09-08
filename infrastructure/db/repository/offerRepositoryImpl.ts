@@ -10,7 +10,7 @@ export class OfferRepositoryImpl implements OfferRepository {
   async add(dto: AddOfferDto): Promise<Offer> {
     const { clientId, url, clickCost } = dto;
     const query = `
-      INSERT INTO Offers (client_id, url, click_cost)
+      INSERT INTO traffic.offers (client_id, url, click_cost)
       VALUES ($1, $2, $3)
       RETURNING offer_id;
     `;
