@@ -3,12 +3,12 @@ import { AddOfferDto } from "./dto/addOfferDto";
 import { UpdateOfferDto } from "./dto/updateOfferDto";
 
 export interface OfferRepository {
-    add(dto: AddOfferDto): Offer
-    getById(id: number): Offer
-    getByClientId(clientId: number): Offer
-    getByUrl(url: string): Offer
-    getByClickCost(clickCost: number): Offer
-    getAll(): Offer
-    remove(id: number): void
-    update(dto: UpdateOfferDto): Offer
+    add(dto: AddOfferDto): Promise<Offer>;
+    getById(id: number): Promise<Offer>;
+    getByClientId(clientId: number): Promise<Offer[]>;
+    getByUrl(url: string): Promise<Offer>;
+    getByClickCost(clickCost: number): Promise<Offer[]>;
+    getAll(): Promise<Offer[]>;
+    remove(id: number): Promise<void>;
+    update(id: number, dto: UpdateOfferDto): Promise<Offer>;
 }
