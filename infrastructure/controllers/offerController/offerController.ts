@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { OfferService } from "../../../core/services/offerService/offerService";
-import { OfferRepositoryImpl } from "../../db/repository/offerRepositoryImpl";
+import { OfferService } from "../../../core/services/offerService";
+import { OfferRepositoryImpl } from "../../db/repositories/offerRepositoryImpl";
 import { AddOfferDto } from '../../../core/repositories/offerRepository/dto/addOfferDto'
 import { UpdateOfferDto } from '../../../core/repositories/offerRepository/dto/updateOfferDto'
 import  pool from "../../db/config/dbConfig";

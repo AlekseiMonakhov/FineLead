@@ -1,6 +1,6 @@
 import { Click } from "../../../core/models/Click";
 import { ClickDBModel } from "../models/clickDBModel";
-import { DBMapper } from "./MapperInterface";
+import { DBMapper } from "./mapperInterface/MapperInterface";
 
 
 export class AcceptedOfferMapper implements DBMapper<Click, ClickDBModel> {

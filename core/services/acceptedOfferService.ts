@@ -1,6 +1,6 @@
-import { AcceptedOffer } from '../../models/AcceptedOffer';
-import { AcceptedOfferRepository } from '../../repositories/acceptedOfferRepository/acceptedOfferRepository';
-import { CreateAcceptedOfferDto } from '../../repositories/acceptedOfferRepository/dto/createAcceptedOfferDto';
+import { AcceptedOffer } from '../models/AcceptedOffer';
+import { AcceptedOfferRepository } from '../repositories/acceptedOfferRepository/acceptedOfferRepository';
+import { CreateAcceptedOfferDto } from '../repositories/acceptedOfferRepository/dto/createAcceptedOfferDto';
 
 export class AcceptedOfferService {
   constructor(private readonly acceptedOfferRepository: AcceptedOfferRepository) {}

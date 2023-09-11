@@ -1,6 +1,6 @@
 import { AcceptedOffer } from "../../../core/models/AcceptedOffer";
 import { AcceptedOfferDBModel } from "../models/acceptedOfferDBModel";
-import { DBMapper } from "./MapperInterface";
+import { DBMapper } from "./mapperInterface/MapperInterface";
 
 export class AcceptedOfferMapper implements DBMapper<AcceptedOffer, AcceptedOfferDBModel> {
     toDomain(entity: AcceptedOfferDBModel): AcceptedOffer {

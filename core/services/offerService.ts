@@ -1,7 +1,7 @@
-import { Offer } from '../../models/Offer';
-import { AddOfferDto } from '../../repositories/offerRepository/dto/addOfferDto';
-import { UpdateOfferDto } from '../../repositories/offerRepository/dto/updateOfferDto';
-import { OfferRepository } from '../../repositories/offerRepository/offerRepository';
+import { Offer } from '../models/Offer';
+import { AddOfferDto } from '../repositories/offerRepository/dto/addOfferDto';
+import { UpdateOfferDto } from '../repositories/offerRepository/dto/updateOfferDto';
+import { OfferRepository } from '../repositories/offerRepository/offerRepository';
 
 export class OfferService {
   constructor(private readonly offerRepository: OfferRepository) {}

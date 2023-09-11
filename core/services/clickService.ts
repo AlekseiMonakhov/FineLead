@@ -1,6 +1,6 @@
-import { Click } from '../../models/Click';
-import { ClickRepository } from '../../repositories/clickRepository/clickRepository';
-import { AddClickDto } from '../../repositories/clickRepository/dto/createClickDto';
+import { Click } from '../models/Click';
+import { ClickRepository } from '../repositories/clickRepository/clickRepository';
+import { AddClickDto } from '../repositories/clickRepository/dto/createClickDto';
 
 export class ClickService {
   constructor(private readonly clickRepository: ClickRepository) {}
@@ -27,5 +27,9 @@ export class ClickService {
 
   async remove(id: number): Promise<void> {
     await this.clickRepository.remove(id);
+  }
+
+  _getClicksByOfferId(offerId: number): Promise<Click[]> {
+    return this.clickRepository.getByOfferId(offerId);
   }
 }
