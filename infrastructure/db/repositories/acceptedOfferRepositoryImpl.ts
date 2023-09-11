@@ -123,7 +123,7 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
   async remove(id: number): Promise<void> {
     const query = `
       DELETE FROM traffic.accepted_offers
-      WHERE offer_id = $1;
+      WHERE accepted_offer_id = $1;
     `;
     const values = [id];
 

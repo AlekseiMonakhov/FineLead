@@ -1,38 +1,35 @@
 import { Pool } from "pg";
-import { AcceptedOfferRepository } from "../../../core/repositories/acceptedOfferRepository/acceptedOfferRepository";
-import { AcceptedOffer } from "../../../core/models/AcceptedOffer";
-import { CreateAcceptedOfferDto } from "../../../core/repositories/acceptedOfferRepository/dto/createAcceptedOfferDto";
-import dotenv from "dotenv";
+import { ClickRepository } from "../../../core/repositories/clickRepository/clickRepository";
+import { AddClickDto } from "../../../core/repositories/clickRepository/dto/createClickDto";
+import { Click } from "../../../core/models/Click";
 
-dotenv.config();
 
-export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
+export class ClickRepositoryImpl implements ClickRepository {
   constructor(private readonly pool: Pool) {}
 
-  async create(dto: CreateAcceptedOfferDto): Promise<AcceptedOffer> {
-    const { offerId, trafficProviderId } = dto;
-    const proxyLink = `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/${offerId}-${trafficProviderId}`;
+  async add(dto: AddClickDto): Promise<Click> {
+    const { offerId, acceptedOfferId, trafficProviderId, ip } = dto;
     const query = `
-      INSERT INTO traffic.accepted_offers (offer_id, traffic_provider_id, proxy_link)
+      INSERT INTO traffic.clicks (offer_id, accepted_offer_id, traffic_provider_id, ip_address)
       VALUES ($1, $2, $3)
-      RETURNING accepted_offer_id;
+      RETURNING click_id;
     `;
-    const values = [offerId, trafficProviderId, proxyLink];
+    const values = [offerId, acceptedOfferId, trafficProviderId, ip];
 
     const client = await this.pool.connect();
     try {
       const result = await client.query(query, values);
-      const acceptedOfferData = result.rows[0];
-      return new AcceptedOffer(acceptedOfferData.accepted_offer_id, acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link);
+      const clickData = result.rows[0];
+      return new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address);
     } finally {
       client.release();
     }
   }
 
-  async getById(id: number): Promise<AcceptedOffer> {
+  async getById(id: number): Promise<Click> {
     const query = `
-      SELECT * FROM traffic.accepted_offers
-      WHERE accepted_offer_id = $1;
+      SELECT * FROM traffic.clicks
+      WHERE click_id = $1;
     `;
     const values = [id];
 
@@ -40,19 +37,19 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
     try {
       const result = await client.query(query, values);
       if (result.rows.length === 0) {
-        throw new Error("Accepted offer not found");
+        throw new Error("Click not found");
       }
 
-      const acceptedOfferData = result.rows[0];
-      return new AcceptedOffer(acceptedOfferData.accepted_offer_id, acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link);
+      const clickData = result.rows[0];
+      return new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address);
     } finally {
       client.release();
     }
   }
 
-  async getByTrafficProviderId(trafficProviderId: number): Promise<AcceptedOffer[]> {
+  async getByTrafficProviderId(trafficProviderId: number): Promise<Click[]> {
     const query = `
-      SELECT * FROM traffic.accepted_offers
+      SELECT * FROM traffic.clicks
       WHERE traffic_provider_id = $1;
     `;
     const values = [trafficProviderId];
@@ -60,35 +57,16 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
     const client = await this.pool.connect();
     try {
       const result = await client.query(query, values);
-      return result.rows.map(acceptedOfferData => new AcceptedOffer(acceptedOfferData.accepted_offer_id, acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link));
+      return result.rows.map(clickData => new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address));
     } finally {
       client.release();
     }
   }
 
-  async getByProxyLink(proxyLink: string): Promise<AcceptedOffer> {
-    const query = `
-      SELECT * FROM traffic.accepted_offers
-      WHERE proxy_link = $1;
-    `;
-    const values = [proxyLink];
 
-    const client = await this.pool.connect();
-    try {
-      const result = await client.query(query, values);
-      if (result.rows.length === 0) {
-        throw new Error("Accepted offer not found");
-      }
-      const offerData = result.rows[0];
-      return new AcceptedOffer(offerData.offer_id, offerData.client_id, offerData.url, offerData.click_cost);
-    } finally {
-      client.release();
-    }
-  }
-
-  async getByOfferId(offerId: number): Promise<AcceptedOffer[]> {
+  async getByOfferId(offerId: number): Promise<Click[]> {
     const query = `
-      SELECT * FROM traffic.accepted_offers
+      SELECT * FROM traffic.clicks
       WHERE offer_id = $1;
     `;
     const values = [offerId];
@@ -96,21 +74,21 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
     const client = await this.pool.connect();
     try {
       const result = await client.query(query, values);
-      return result.rows.map(acceptedOfferData => new AcceptedOffer(acceptedOfferData.accepted_offer_id, acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link));
+      return result.rows.map(clickData => new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address));
     } finally {
       client.release();
     }
   }
 
-  async getAll(): Promise<AcceptedOffer[]> {
+  async getAll(): Promise<Click[]> {
     const query = `
-      SELECT * FROM traffic.accepted_offers;
+      SELECT * FROM traffic.clicks;
     `;
 
     const client = await this.pool.connect();
     try {
       const result = await client.query(query);
-      return result.rows.map(acceptedOfferData => new AcceptedOffer(acceptedOfferData.accepted_offer_id, acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link));
+      return result.rows.map(clickData => new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address));
     } finally {
       client.release();
     }
@@ -118,8 +96,8 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
 
   async remove(id: number): Promise<void> {
     const query = `
-      DELETE FROM traffic.accepted_offers
-      WHERE offer_id = $1;
+      DELETE FROM traffic.clicks
+      WHERE click_id = $1;
     `;
     const values = [id];
 
