@@ -1,7 +1,14 @@
+CREATE ROLE test_role WITH LOGIN PASSWORD 'test_password' SUPERUSER;
+
+ALTER ROLE test_user SET ROLE test_role;
+
 CREATE TYPE user_role AS ENUM ('client', 'traffic_provider', 'admin');
 
 CREATE SCHEMA IF NOT EXISTS users;
 CREATE SCHEMA IF NOT EXISTS traffic;
+
+GRANT USAGE ON SCHEMA users TO test_role;
+GRANT USAGE ON SCHEMA traffic TO test_role;
 
 CREATE TABLE IF NOT EXISTS users.users (
   user_id SERIAL PRIMARY KEY,
@@ -46,5 +53,3 @@ CREATE TABLE IF NOT EXISTS traffic.clicks (
   ip_address VARCHAR(45)
 );
 
-GRANT USAGE ON SCHEMA users TO test_role;
-GRANT USAGE ON SCHEMA traffic TO test_role;

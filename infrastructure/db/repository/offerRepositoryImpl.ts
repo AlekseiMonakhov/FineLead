@@ -8,19 +8,21 @@ export class OfferRepositoryImpl implements OfferRepository {
   constructor(private readonly pool: Pool) {}
 
   async add(dto: AddOfferDto): Promise<Offer> {
-    const { clientId, url, clickCost } = dto;
+    const { url, clickCost } = dto;
+    console.log("OfferRepositoryImpl.add: ", dto)
+    console.log("OfferRepositoryImpl.add: ",url, clickCost)
     const query = `
-      INSERT INTO traffic.offers (client_id, url, click_cost)
-      VALUES ($1, $2, $3)
+      INSERT INTO traffic.offers (url, click_cost)
+      VALUES ($1, $2)
       RETURNING offer_id;
     `;
-    const values = [clientId, url, clickCost];
+    const values = [url, clickCost];
 
     const client = await this.pool.connect();
     try {
       const result = await client.query(query, values);
-      const offerId = result.rows[0].offer_id;
-      return new Offer(offerId, clientId, url, clickCost);
+      const offerData = result.rows[0];
+      return new Offer(offerData.offer_id, offerData.client_id, offerData.url, offerData.click_cost);
     } finally {
       client.release();
     }
@@ -28,7 +30,7 @@ export class OfferRepositoryImpl implements OfferRepository {
 
   async getById(id: number): Promise<Offer> {
     const query = `
-      SELECT * FROM Offers
+      SELECT * FROM traffic.offers
       WHERE offer_id = $1;
     `;
     const values = [id];
@@ -49,7 +51,7 @@ export class OfferRepositoryImpl implements OfferRepository {
 
   async getByClientId(clientId: number): Promise<Offer[]> {
     const query = `
-      SELECT * FROM Offers
+      SELECT * FROM traffic.offers
       WHERE client_id = $1;
     `;
     const values = [clientId];
@@ -65,7 +67,7 @@ export class OfferRepositoryImpl implements OfferRepository {
 
   async getByUrl(url: string): Promise<Offer> {
     const query = `
-      SELECT * FROM Offers
+      SELECT * FROM traffic.offers
       WHERE url = $1;
     `;
     const values = [url];
@@ -86,7 +88,7 @@ export class OfferRepositoryImpl implements OfferRepository {
 
   async getByClickCost(clickCost: number): Promise<Offer[]> {
     const query = `
-      SELECT * FROM Offers
+      SELECT * FROM traffic.offers
       WHERE click_cost = $1;
     `;
     const values = [clickCost];
@@ -102,7 +104,7 @@ export class OfferRepositoryImpl implements OfferRepository {
 
   async getAll(): Promise<Offer[]> {
     const query = `
-      SELECT * FROM Offers;
+      SELECT * FROM traffic.offers;
     `;
 
     const client = await this.pool.connect();
@@ -116,7 +118,7 @@ export class OfferRepositoryImpl implements OfferRepository {
 
   async remove(id: number): Promise<void> {
     const query = `
-      DELETE FROM Offers
+      DELETE FROM traffic.offers
       WHERE offer_id = $1;
     `;
     const values = [id];
@@ -132,7 +134,7 @@ export class OfferRepositoryImpl implements OfferRepository {
   async update(id: number, dto: UpdateOfferDto): Promise<Offer> {
     const { url, clickCost } = dto;
     const query = `
-      UPDATE Offers
+      UPDATE traffic.offers
       SET url = $1, click_cost = $2
       WHERE offer_id = $3
       RETURNING *;

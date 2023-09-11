@@ -26,7 +26,6 @@ offerRouter.get('/all-offers', async (req, res) => {
 });
 
 offerRouter.post('/create-offer', async (req, res) => {
-  console.log(req.body);
   await offerController.create(req, res);
 });
 

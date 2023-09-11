@@ -4,8 +4,10 @@ import { OfferRepositoryImpl } from "../../db/repository/offerRepositoryImpl";
 import { AddOfferDto } from '../../../core/repositories/offerRepository/dto/addOfferDto'
 import { UpdateOfferDto } from '../../../core/repositories/offerRepository/dto/updateOfferDto'
 import  pool from "../../db/config/dbConfig";
+import { OfferMapper } from "../../db/mappers/offerMapper";
 
 const offerRepositoryImpl = new OfferRepositoryImpl(pool);  
+const offerMapper = new OfferMapper();
 
 export class OfferController {
   constructor(private offerService: OfferService = new OfferService(offerRepositoryImpl)) {}
@@ -61,7 +63,7 @@ export class OfferController {
 
   async create(req: Request, res: Response) {
     try {
-      const addOfferDto = req.body as AddOfferDto;
+      const addOfferDto = offerMapper.toDomain(req.body) as AddOfferDto;
       const newOffer = await this.offerService.add(addOfferDto);
       res.status(201).json(newOffer);
     } catch (error) {
@@ -72,7 +74,7 @@ export class OfferController {
   async update(req: Request, res: Response) {
     try {
       const offerId = parseInt(req.params.id);
-      const updateOfferDto = req.body as UpdateOfferDto;
+      const updateOfferDto = offerMapper.toDomain(req.body) as UpdateOfferDto;
       const updatedOffer = await this.offerService.update(offerId, updateOfferDto);
       res.json(updatedOffer);
     } catch (error) {
