@@ -2,13 +2,16 @@ import { Pool } from "pg";
 import { AcceptedOfferRepository } from "../../../core/repositories/acceptedOfferRepository/acceptedOfferRepository";
 import { AcceptedOffer } from "../../../core/models/AcceptedOffer";
 import { CreateAcceptedOfferDto } from "../../../core/repositories/acceptedOfferRepository/dto/createAcceptedOfferDto";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
   constructor(private readonly pool: Pool) {}
 
   async create(dto: CreateAcceptedOfferDto): Promise<AcceptedOffer> {
     const { offerId, trafficProviderId } = dto;
-    const proxyLink = `http://${process.env.HOST}:${process.env.PORT}/${offerId}-${trafficProviderId}`;
+    const proxyLink = `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/${offerId}-${trafficProviderId}`;
     const query = `
       INSERT INTO traffic.accepted_offers (offer_id, traffic_provider_id, proxy_link)
       VALUES ($1, $2, $3)

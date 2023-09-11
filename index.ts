@@ -12,7 +12,7 @@ const corsOptions = {
   origin: true,
   credentials: true,
 };
-const routers = [offerRouter, acceptedOfferRouter];
+const routers = [acceptedOfferRouter, offerRouter];
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/api/v1', routers);
