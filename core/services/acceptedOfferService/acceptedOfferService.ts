@@ -13,8 +13,8 @@ export class AcceptedOfferService {
     return this.acceptedOfferRepository.getByTrafficProviderId(trafficProviderId);
   }
 
-  async getByProxyUrl(proxyUrl: string): Promise<AcceptedOffer> {
-    return this.acceptedOfferRepository.getByProxyUrl(proxyUrl);
+  async getByProxyLink(proxyUrl: string): Promise<AcceptedOffer> {
+    return this.acceptedOfferRepository.getByProxyLink(proxyUrl);
   }
 
   async getByOfferId(offerId: number): Promise<AcceptedOffer[]> {
