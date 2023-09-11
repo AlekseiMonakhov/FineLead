@@ -8,11 +8,11 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
 
   async create(dto: CreateAcceptedOfferDto): Promise<AcceptedOffer> {
     const { offerId, trafficProviderId } = dto;
-    const proxyLink = `http://${process.env.HOST}:${process.env.PORT}/${offerId}/${trafficProviderId}`;
+    const proxyLink = `http://${process.env.HOST}:${process.env.PORT}/${offerId}-${trafficProviderId}`;
     const query = `
       INSERT INTO traffic.accepted_offers (offer_id, traffic_provider_id, proxy_link)
       VALUES ($1, $2, $3)
-      RETURNING offer_id;
+      RETURNING accepted_offer_id;
     `;
     const values = [offerId, trafficProviderId, proxyLink];
 
