@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS traffic.offers (
   click_cost DECIMAL(10, 2)
 );
 
-CREATE TABLE IF NOT EXISTS traffic.traffic_provider_offers (
-  traffic_provider_offer_id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS traffic.accepted_offers (
+  accepted_offer_id SERIAL PRIMARY KEY,
   traffic_provider_id INT REFERENCES users.traffic_providers(provider_id),
   offer_id INT REFERENCES traffic.offers(offer_id),
   proxy_link VARCHAR(255)
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS traffic.traffic_provider_offers (
 CREATE TABLE IF NOT EXISTS traffic.clicks (
   click_id SERIAL PRIMARY KEY,
   offer_id INT REFERENCES traffic.offers(offer_id),
-  traffic_provider_offer_id INT REFERENCES traffic.traffic_provider_offers(traffic_provider_offer_id),
+  accepted_offer_id INT REFERENCES traffic.accepted_offers(accepted_offer_id),
   click_datetime TIMESTAMP,
   ip_address VARCHAR(45)
 );
