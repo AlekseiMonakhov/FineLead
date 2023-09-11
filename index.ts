@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import offerRouter from './infrastructure/routes/offerRoute/offerRoute';
 import pool from './infrastructure/db/config/dbConfig';
+import acceptedOfferRouter from './infrastructure/routes/acceptedOfferRoute/acceptedOfferRoute';
 
 dotenv.config();
 
@@ -11,9 +12,10 @@ const corsOptions = {
   origin: true,
   credentials: true,
 };
+const routers = [offerRouter, acceptedOfferRouter];
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use('/api/v1', offerRouter);
+app.use('/api/v1', routers);
 const port = process.env.SERVER_PORT;
 const host = process.env.SERVER_HOST;
 
