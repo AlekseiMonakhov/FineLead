@@ -21,6 +21,14 @@ CREATE TABLE IF NOT EXISTS users.users (
   role user_role
 );
 
+INSERT INTO users.users (username, hash_password, email, created_at, updated_at, verified, role)
+VALUES 
+  ('testUser1Client1', 'hash_password', 'testUser1@gmail.com', CURRENT_DATE, CURRENT_DATE, false, 'client'),
+  ('testUser2Client2', 'hash_password', 'testUser2@gmail.com', CURRENT_DATE, CURRENT_DATE, false, 'client'),
+  ('testUser3Provider1', 'hash_password', 'testUser3@gmail.com', CURRENT_DATE, CURRENT_DATE, false, 'traffic_provider'),
+  ('testUser4Provider2', 'hash_password', 'testUser4@gmail.com', CURRENT_DATE, CURRENT_DATE, false, 'traffic_provider');
+
+
 CREATE TABLE IF NOT EXISTS users.clients (
   client_id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users.users(user_id)
@@ -30,6 +38,12 @@ CREATE TABLE IF NOT EXISTS users.traffic_providers (
   provider_id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users.users(user_id)
 );
+
+INSERT INTO users.clients (user_id)
+SELECT user_id FROM users.users WHERE username IN ('testUser1Client1', 'testUser2Client2');
+
+INSERT INTO users.traffic_providers (user_id)
+SELECT user_id FROM users.users WHERE username IN ('testUser3Provider1', 'testUser4Provider2');
 
 CREATE TABLE IF NOT EXISTS traffic.offers (
   offer_id SERIAL PRIMARY KEY,

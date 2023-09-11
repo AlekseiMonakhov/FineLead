@@ -8,15 +8,13 @@ export class OfferRepositoryImpl implements OfferRepository {
   constructor(private readonly pool: Pool) {}
 
   async add(dto: AddOfferDto): Promise<Offer> {
-    const { url, clickCost } = dto;
-    console.log("OfferRepositoryImpl.add: ", dto)
-    console.log("OfferRepositoryImpl.add: ",url, clickCost)
+    const { clientId, url, clickCost } = dto;
     const query = `
-      INSERT INTO traffic.offers (url, click_cost)
-      VALUES ($1, $2)
+      INSERT INTO traffic.offers (client_id, url, click_cost)
+      VALUES ($1, $2, $3)
       RETURNING offer_id;
     `;
-    const values = [url, clickCost];
+    const values = [clientId ,url, clickCost];
 
     const client = await this.pool.connect();
     try {
