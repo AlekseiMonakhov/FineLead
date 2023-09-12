@@ -1,6 +1,6 @@
 import express from 'express';
 import { Router } from 'express';
-import { AcceptedOfferController } from '../../controllers/acceptedOfferController/acceptedOfferController';
+import { AcceptedOfferController } from '../controllers/acceptedOfferController';
 
 const acceptedOfferRouter: Router = express.Router();
 const acceptedOfferController = new AcceptedOfferController();

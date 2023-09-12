@@ -1,9 +1,10 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import offerRouter from './infrastructure/routes/offerRoute/offerRoute';
+import offerRouter from './infrastructure/routes/offerRoute';
 import pool from './infrastructure/db/config/dbConfig';
-import acceptedOfferRouter from './infrastructure/routes/acceptedOfferRoute/acceptedOfferRoute';
+import acceptedOfferRouter from './infrastructure/routes/acceptedOfferRoute';
+import clickRouter from './infrastructure/routes/clickRoute';
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ const corsOptions = {
   origin: true,
   credentials: true,
 };
-const routers = [offerRouter, acceptedOfferRouter];
+const routers = [offerRouter, acceptedOfferRouter, clickRouter];
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/api/v1', routers);
@@ -24,8 +25,8 @@ app.listen(port, async () => {
   try {
     const client = await pool.connect();
     client.release();
-    console.log('Соединение с базой данных установлено.');
+    console.log('The database connection has been established.');
   } catch (error) {
-    console.error('Ошибка при установлении соединения с базой данных:', error);
+    console.error('Error establishing a database connection:', error);
   }
 });

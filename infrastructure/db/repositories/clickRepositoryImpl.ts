@@ -1,31 +1,58 @@
-import { Pool } from "pg";
+import { Pool, PoolClient } from "pg";
 import { ClickRepository } from "../../../core/repositories/clickRepository/clickRepository";
-import { AddClickDto } from "../../../core/repositories/clickRepository/dto/createClickDto";
+import { AddClickDto } from "../../../core/repositories/clickRepository/dto/addClickDto";
 import { Click } from "../../../core/models/Click";
 
 
 export class ClickRepositoryImpl implements ClickRepository {
   constructor(private readonly pool: Pool) {}
 
-  async add(dto: AddClickDto): Promise<Click> {
-    const { offerId, acceptedOfferId, trafficProviderId, ip } = dto;
-    const query = `
-      INSERT INTO traffic.clicks (offer_id, accepted_offer_id, traffic_provider_id, ip_address)
-      VALUES ($1, $2, $3, $4)
-      RETURNING *;
-    `;
-    const values = [offerId, acceptedOfferId, trafficProviderId, ip];
+  private static async getOfferIdByAcceptedOfferId(
+    client: PoolClient,
+    acceptedOfferId: number
+  ): Promise<number | null> {
+    const query = 'SELECT offer_id FROM traffic.accepted_offers WHERE accepted_offer_id = $1';
+    const result = await client.query(query, [acceptedOfferId]);
+    const data = result.rows[0];
+    return data ? data.offer_id : null;
+  }
 
-    const client = await this.pool.connect();
+  private static async getOfferUrlByOfferId(
+    client: PoolClient,
+    offerId: number
+  ): Promise<string | null> {
+    const query = 'SELECT url FROM traffic.offers WHERE offer_id = $1';
+    const result = await client.query(query, [offerId]);
+    const data = result.rows[0];
+    return data ? data.url : null;
+  }
+
+  async add(dto: AddClickDto): Promise<string | null> {
+    const { acceptedOfferId, trafficProviderId, ip } = dto;
+    const query = `
+      INSERT INTO traffic.clicks (accepted_offer_id, traffic_provider_id, ip_address)
+      VALUES ($1, $2, $3);
+    `;
+    const values = [acceptedOfferId, trafficProviderId, ip];
+
+    const client: PoolClient = await this.pool.connect();
+
     try {
-      const result = await client.query(query, values);
-      const clickData = result.rows[0];
-      return new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address);
+      await client.query(query, values);
+
+      const offerId = await ClickRepositoryImpl.getOfferIdByAcceptedOfferId(client, acceptedOfferId);
+
+      if (offerId !== null) {
+        const offerUrl = await ClickRepositoryImpl.getOfferUrlByOfferId(client, offerId);
+        return offerUrl || null;
+      } else {
+        return null;
+      }
     } finally {
       client.release();
     }
   }
-
+  
   async getById(id: number): Promise<Click> {
     const query = `
       SELECT * FROM traffic.clicks
@@ -41,7 +68,7 @@ export class ClickRepositoryImpl implements ClickRepository {
       }
 
       const clickData = result.rows[0];
-      return new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address);
+      return new Click(clickData.accepted_offer_id, clickData.traffic_provider_id, clickData.ip_address);
     } finally {
       client.release();
     }
@@ -57,7 +84,7 @@ export class ClickRepositoryImpl implements ClickRepository {
     const client = await this.pool.connect();
     try {
       const result = await client.query(query, values);
-      return result.rows.map(clickData => new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address));
+      return result.rows.map(clickData => new Click(clickData.accepted_offer_id, clickData.traffic_provider_id, clickData.ip_address));
     } finally {
       client.release();
     }
@@ -74,7 +101,7 @@ export class ClickRepositoryImpl implements ClickRepository {
     const client = await this.pool.connect();
     try {
       const result = await client.query(query, values);
-      return result.rows.map(clickData => new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address));
+      return result.rows.map(clickData => new Click(clickData.accepted_offer_id, clickData.traffic_provider_id, clickData.ip_address));
     } finally {
       client.release();
     }
@@ -88,7 +115,7 @@ export class ClickRepositoryImpl implements ClickRepository {
     const client = await this.pool.connect();
     try {
       const result = await client.query(query);
-      return result.rows.map(clickData => new Click(clickData.accepted_offer_id, clickData.offer_id, clickData.traffic_provider_id, clickData.ip_address));
+      return result.rows.map(clickData => new Click(clickData.accepted_offer_id, clickData.traffic_provider_id, clickData.ip_address));
     } finally {
       client.release();
     }

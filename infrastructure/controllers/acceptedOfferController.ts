@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import  pool from "../../db/config/dbConfig";
-import { AcceptedOfferService } from "../../../core/services/acceptedOfferService";
-import { AcceptedOfferMapper } from "../../db/mappers/acceptedOfferMapper";
-import { AcceptedOfferRepositoryImpl } from "../../db/repositories/acceptedOfferRepositoryImpl";
-import { CreateAcceptedOfferDto } from "../../../core/repositories/acceptedOfferRepository/dto/createAcceptedOfferDto";
+import  pool from "../db/config/dbConfig";
+import { AcceptedOfferService } from "../../core/services/acceptedOfferService";
+import { AcceptedOfferMapper } from "../db/mappers/acceptedOfferMapper";
+import { AcceptedOfferRepositoryImpl } from "../db/repositories/acceptedOfferRepositoryImpl";
+import { CreateAcceptedOfferDto } from "../../core/repositories/acceptedOfferRepository/dto/createAcceptedOfferDto";
 
 const acceptedOfferRepositoryImpl = new AcceptedOfferRepositoryImpl(pool);  
 const acceptedOfferMapper = new AcceptedOfferMapper();

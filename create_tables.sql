@@ -61,7 +61,6 @@ CREATE TABLE IF NOT EXISTS traffic.accepted_offers (
 
 CREATE TABLE IF NOT EXISTS traffic.clicks (
   click_id SERIAL PRIMARY KEY,
-  offer_id INT REFERENCES traffic.offers(offer_id),
   traffic_provider_id INT REFERENCES users.traffic_providers(provider_id),
   accepted_offer_id INT REFERENCES traffic.accepted_offers(accepted_offer_id),
   click_datetime TIMESTAMP,

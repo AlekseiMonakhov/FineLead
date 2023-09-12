@@ -1,6 +1,6 @@
 import { Click } from '../models/Click';
 import { ClickRepository } from '../repositories/clickRepository/clickRepository';
-import { AddClickDto } from '../repositories/clickRepository/dto/createClickDto';
+import { AddClickDto } from '../repositories/clickRepository/dto/addClickDto';
 
 export class ClickService {
   constructor(private readonly clickRepository: ClickRepository) {}
@@ -21,7 +21,7 @@ export class ClickService {
     return this.clickRepository.getAll();
   }
 
-  async add(dto: AddClickDto): Promise<Click> {
+  async add(dto: AddClickDto): Promise<string | null> {
     return this.clickRepository.add(dto);
   }
 
