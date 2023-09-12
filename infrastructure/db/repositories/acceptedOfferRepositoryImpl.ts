@@ -19,7 +19,7 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
     const query = `
       INSERT INTO traffic.accepted_offers (offer_id, traffic_provider_id, proxy_link)
       VALUES ($1, $2, $3)
-      RETURNING accepted_offer_id;
+      RETURNING *;
     `;
     const values = [offerId, trafficProviderId, proxyLink];
 

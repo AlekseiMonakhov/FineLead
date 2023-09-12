@@ -11,8 +11,8 @@ export class ClickRepositoryImpl implements ClickRepository {
     const { offerId, acceptedOfferId, trafficProviderId, ip } = dto;
     const query = `
       INSERT INTO traffic.clicks (offer_id, accepted_offer_id, traffic_provider_id, ip_address)
-      VALUES ($1, $2, $3)
-      RETURNING click_id;
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
     `;
     const values = [offerId, acceptedOfferId, trafficProviderId, ip];
 

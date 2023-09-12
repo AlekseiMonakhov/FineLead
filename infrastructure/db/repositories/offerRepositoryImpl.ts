@@ -12,7 +12,7 @@ export class OfferRepositoryImpl implements OfferRepository {
     const query = `
       INSERT INTO traffic.offers (client_id, url, click_cost)
       VALUES ($1, $2, $3)
-      RETURNING offer_id;
+      RETURNING *;
     `;
     const values = [clientId ,url, clickCost];
 
