@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS traffic.accepted_offers (
 CREATE TABLE IF NOT EXISTS traffic.clicks (
   click_id SERIAL PRIMARY KEY,
   traffic_provider_id INT REFERENCES users.traffic_providers(provider_id),
-  accepted_offer_id INT REFERENCES traffic.accepted_offers(accepted_offer_id),
+  offer_id INT REFERENCES traffic.offers(offer_id),
   click_datetime TIMESTAMP,
   ip_address VARCHAR(45)
 );

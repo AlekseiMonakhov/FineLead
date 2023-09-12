@@ -28,8 +28,4 @@ export class ClickService {
   async remove(id: number): Promise<void> {
     await this.clickRepository.remove(id);
   }
-
-  _getClicksByOfferId(offerId: number): Promise<Click[]> {
-    return this.clickRepository.getByOfferId(offerId);
-  }
 }
