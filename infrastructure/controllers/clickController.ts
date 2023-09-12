@@ -43,6 +43,7 @@ export class ClickController {
       const { ip } = req;
       const { proxyLink } = req.params;
       const [acceptedOfferId, trafficProviderId] = proxyLink.split('-');
+      console.log(ip, proxyLink)
       const addClickDto = new AddClickDto(
         parseInt(acceptedOfferId),
         parseInt(trafficProviderId),

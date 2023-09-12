@@ -17,7 +17,7 @@ clickRouter.get('/all-clicks', async (req, res) => {
   await clickController.getAll(req, res);
 });
 
-clickRouter.post('/:proxyLink', async (req, res) => {
+clickRouter.get('/:proxyLink', async (req, res) => {
   await clickController.add(req, res);
 });
 

@@ -29,6 +29,7 @@ export class ClickRepositoryImpl implements ClickRepository {
 
   async add(dto: AddClickDto): Promise<string | null> {
     const { acceptedOfferId, trafficProviderId, ip } = dto;
+    console.log(acceptedOfferId, trafficProviderId, ip)
     const query = `
       INSERT INTO traffic.clicks (accepted_offer_id, traffic_provider_id, ip_address)
       VALUES ($1, $2, $3);

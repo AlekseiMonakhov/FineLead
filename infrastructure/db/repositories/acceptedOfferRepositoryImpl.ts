@@ -17,17 +17,17 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
     const { offerId, trafficProviderId } = dto;
     const proxyLink = `http://${serverHost}:${serverPort}/${apiPrefix}/${offerId}-${trafficProviderId}`;
     const query = `
-      INSERT INTO traffic.accepted_offers (offer_id, traffic_provider_id, proxy_link)
+      INSERT INTO traffic.accepted_offers (traffic_provider_id, offer_id, proxy_link)
       VALUES ($1, $2, $3)
       RETURNING *;
     `;
-    const values = [offerId, trafficProviderId, proxyLink];
+    const values = [trafficProviderId, offerId, proxyLink];
 
     const client = await this.pool.connect();
     try {
       const result = await client.query(query, values);
       const acceptedOfferData = result.rows[0];
-      return new AcceptedOffer(acceptedOfferData.accepted_offer_id, acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link);
+      return new AcceptedOffer(acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link, acceptedOfferData.accepted_offer_id);
     } finally {
       client.release();
     }
@@ -48,7 +48,7 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
       }
 
       const acceptedOfferData = result.rows[0];
-      return new AcceptedOffer(acceptedOfferData.accepted_offer_id, acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link);
+      return new AcceptedOffer(acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link, acceptedOfferData.accepted_offer_id);
     } finally {
       client.release();
     }
@@ -83,8 +83,8 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
       if (result.rows.length === 0) {
         throw new Error("Accepted offer not found");
       }
-      const offerData = result.rows[0];
-      return new AcceptedOffer(offerData.offer_id, offerData.client_id, offerData.url, offerData.click_cost);
+      const acceptedOfferData = result.rows[0];
+      return new AcceptedOffer(acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link, acceptedOfferData.accepted_offer_id);
     } finally {
       client.release();
     }
@@ -100,7 +100,7 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
     const client = await this.pool.connect();
     try {
       const result = await client.query(query, values);
-      return result.rows.map(acceptedOfferData => new AcceptedOffer(acceptedOfferData.accepted_offer_id, acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link));
+      return result.rows.map(acceptedOfferData => new AcceptedOffer(acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link, acceptedOfferData.accepted_offer_id));
     } finally {
       client.release();
     }
@@ -114,7 +114,7 @@ export class AcceptedOfferRepositoryImpl implements AcceptedOfferRepository {
     const client = await this.pool.connect();
     try {
       const result = await client.query(query);
-      return result.rows.map(acceptedOfferData => new AcceptedOffer(acceptedOfferData.accepted_offer_id, acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link));
+      return result.rows.map(acceptedOfferData => new AcceptedOffer(acceptedOfferData.offer_id, acceptedOfferData.traffic_provider_id, acceptedOfferData.proxy_link, acceptedOfferData.accepted_offer_id));
     } finally {
       client.release();
     }
