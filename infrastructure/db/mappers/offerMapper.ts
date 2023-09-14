@@ -1,6 +1,6 @@
-import { Offer } from "../../../../core/models/Offer";
-import { DBMapper } from "../../mappers/mapperInterface/MapperInterface";
-import { OfferDBModel } from "../../models/offerDBModel";
+import { Offer } from "../../../core/models/Offer";
+import { OfferDBModel } from "../models/offerDBModel";
+import { DBMapper } from "./mapperInterface/MapperInterface";
 
 
 export class OfferMapper implements DBMapper<Offer, OfferDBModel> {

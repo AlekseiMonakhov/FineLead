@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import  pool from "../db/postgres/config/postgresConfig";
+import  pool from "../db/config/postgresConfig";
 import { AcceptedOfferService } from "../../core/services/acceptedOfferService";
 import { CreateAcceptedOfferDto } from "../../core/repositories/acceptedOfferRepository/dto/createAcceptedOfferDto";
-import { AcceptedOfferMapper } from "../db/postgres/mappers/acceptedOfferMapper";
-import { AcceptedOfferRepositoryImpl } from "../db/postgres/repositories/acceptedOfferRepositoryImpl";
+import { AcceptedOfferMapper } from "../db/mappers/acceptedOfferMapper";
+import { AcceptedOfferRepositoryImpl } from "../db/repositories/acceptedOfferRepositoryImpl";
 
 const acceptedOfferRepositoryImpl = new AcceptedOfferRepositoryImpl(pool);  
 const acceptedOfferMapper = new AcceptedOfferMapper();

@@ -1,7 +1,7 @@
 import { Pool, PoolClient } from "pg";
-import { Click } from "../../../../core/models/Click";
-import { ClickRepository } from "../../../../core/repositories/clickRepository/clickRepository";
-import { AddClickDto } from "../../../../core/repositories/clickRepository/dto/addClickDto";
+import { Click } from "../../../core/models/Click";
+import { ClickRepository } from "../../../core/repositories/clickRepository/clickRepository";
+import { AddClickDto } from "../../../core/repositories/clickRepository/dto/addClickDto";
 
 
 

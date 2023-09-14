@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import offerRouter from './infrastructure/routes/offerRoute';
-import pool from './infrastructure/db/postgres/config/postgresConfig';
+import pool from './infrastructure/db/config/postgresConfig';
 import acceptedOfferRouter from './infrastructure/routes/acceptedOfferRoute';
 import clickRouter from './infrastructure/routes/clickRoute';
 import { extractAndLoadData } from './infrastructure/utils/syncDbToClickhouse';

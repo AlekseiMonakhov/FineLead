@@ -1,5 +1,5 @@
-import clickhouse from "../db/clickhouse/config/clickhouseConfig";
-import pool from "../db/postgres/config/postgresConfig";
+import clickhouse from "../db/config/clickhouseConfig";
+import pool from "../db/config/postgresConfig";
 
 
 export async function extractAndLoadData() {

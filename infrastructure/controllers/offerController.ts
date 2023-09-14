@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import { OfferService } from "../../core/services/offerService";
 import { AddOfferDto } from '../../core/repositories/offerRepository/dto/addOfferDto'
 import { UpdateOfferDto } from '../../core/repositories/offerRepository/dto/updateOfferDto'
-import  pool from "../db/postgres/config/postgresConfig";
-import { OfferMapper } from "../db/postgres/mappers/offerMapper";
-import { OfferRepositoryImpl } from "../db/postgres/repositories/offerRepositoryImpl";
+import  pool from "../db/config/postgresConfig";
+import { OfferMapper } from "../db/mappers/offerMapper";
+import { OfferRepositoryImpl } from "../db/repositories/offerRepositoryImpl";
 
 
 const offerRepositoryImpl = new OfferRepositoryImpl(pool);  
