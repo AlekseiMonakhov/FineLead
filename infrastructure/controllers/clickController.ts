@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import  pool from "../db/config/dbConfig";
-import { ClickRepositoryImpl } from "../db/repositories/clickRepositoryImpl";
+import  pool from "../db/postgres/config/postgresConfig";
 import { ClickService } from "../../core/services/clickService";
 import { AddClickDto } from "../../core/repositories/clickRepository/dto/addClickDto";
+import { ClickRepositoryImpl } from "../db/postgres/repositories/clickRepositoryImpl";
 
 const clickRepositoryImpl = new ClickRepositoryImpl(pool);  
 

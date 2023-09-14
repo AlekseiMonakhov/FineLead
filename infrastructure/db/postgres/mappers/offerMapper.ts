@@ -1,4 +1,4 @@
-import { Offer } from "../../../core/models/Offer";
+import { Offer } from "../../../../core/models/Offer";
 import { OfferDBModel } from "../models/offerDBModel";
 import { DBMapper } from "./mapperInterface/MapperInterface";
 
