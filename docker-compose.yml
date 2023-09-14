@@ -11,16 +11,19 @@ services:
       - "5434:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql:ro 
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql:ro
 
   clickhouse:
-    image: yandex/clickhouse-server
+    build:
+      context: ./clickhouse
     environment:
       - CLICKHOUSE_USER=${CLICKHOUSE_USER}
       - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
     ports:
       - "8123:8123"
       - "9000:9000"
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
 
   app:
     build:
@@ -35,3 +38,4 @@ services:
 
 volumes:
   postgres-data:
+  clickhouse-data:

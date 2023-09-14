@@ -67,3 +67,7 @@ CREATE TABLE IF NOT EXISTS traffic.clicks (
   ip_address VARCHAR(45)
 );
 
+CREATE TABLE IF NOT EXISTS synced_clicks (
+  last_synced_datetime TIMESTAMP
+);
+
