@@ -20,16 +20,26 @@ services:
     env_file:
       - ./clickhouse/.env  
 
-  app:
+  api:
     build:
-      context: ./app
+      context: ./API
     ports:
       - "3000:3000"
     env_file:
-      - ./app/.env  
+      - ./API/.env  
     depends_on:
       - postgres
       - clickhouse
+
+  click_service:
+    build:
+      context: ./clickService
+    ports:
+      - "3002:3002"
+    env_file:
+      - ./clickService/.env  
+    depends_on:
+      - postgres 
 
 volumes:
   postgres-data:
