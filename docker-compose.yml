@@ -1,37 +1,32 @@
 version: '3'
 services:
   postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    command: ["postgres", "-c", "listen_addresses=*", "-c", "max_connections=300"]
+    build:
+      context: ./postgres   
     ports:
       - "5434:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql:ro
+    env_file:
+      - ./postgres/.env  
 
   clickhouse:
     build:
       context: ./clickhouse
-    environment:
-      - CLICKHOUSE_USER=${CLICKHOUSE_USER}
-      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
     ports:
       - "8123:8123"
-      - "9000:9000"
     volumes:
       - clickhouse-data:/var/lib/clickhouse
+    env_file:
+      - ./clickhouse/.env  
 
   app:
     build:
-      context: .
-    env_file:
-      - .env
+      context: ./app
     ports:
       - "3000:3000"
+    env_file:
+      - ./app/.env  
     depends_on:
       - postgres
       - clickhouse
