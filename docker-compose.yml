@@ -41,6 +41,16 @@ services:
     depends_on:
       - postgres 
 
+  auth_service: 
+    build:
+      context: ./authService
+    ports:
+      - "3003:3003" 
+    env_file:
+      - ./authService/.env
+    depends_on:
+      - postgres    
+
 volumes:
   postgres-data:
   clickhouse-data:

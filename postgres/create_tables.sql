@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users.users (
   user_id SERIAL PRIMARY KEY,
   username VARCHAR(50),
   hash_password VARCHAR(255),
-  email VARCHAR(255),
+  email VARCHAR(255) UNIQUE,
   created_at DATE,
   updated_at DATE,
   verified BOOL,
@@ -38,6 +38,13 @@ CREATE TABLE IF NOT EXISTS users.traffic_providers (
   provider_id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users.users(user_id)
 );
+
+CREATE TABLE IF NOT EXISTS users.refresh_tokens (
+  id serial PRIMARY KEY,
+  token VARCHAR(255) UNIQUE,
+  user_id INTEGER REFERENCES users.users(user_id)
+);
+
 
 INSERT INTO users.clients (user_id)
 SELECT user_id FROM users.users WHERE username IN ('testUser1Client1', 'testUser2Client2');
