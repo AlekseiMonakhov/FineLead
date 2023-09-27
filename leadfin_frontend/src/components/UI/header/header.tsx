@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import styles from './header.module.css';
+import { useUserStore } from '../../../storage/userStore';
+import { Button } from '@mui/material';
 
 export default function Header() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { user, logout, login } = useUserStore();
 
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleMenuItemClick = () => {
-    setIsLoggedIn(false);
+    logout();
     setAnchorEl(null);
   };
 
@@ -26,11 +27,22 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const handleLoginClick = () => {
+    // Моковая авторизация
+    const mockUser = {
+      username: 'mockUser',
+      password: 'mockPassword',
+      role: 'client',
+    };
+
+    login(mockUser.username); // Передаем только юзернейм
+  };
+
   return (
     <Box className={styles.Header}> 
       <AppBar position="static" color='inherit'>
         <Toolbar>
-          {isLoggedIn ? (
+          {user ? (
             <Box className={styles.MenuButton}> 
               <IconButton
                 size="large"
@@ -63,7 +75,11 @@ export default function Header() {
             </Box>
           ) : (
             <Box className={styles.MenuButton}>
-              <Button className={styles.LoggedInButton} color="inherit" onClick={() => setIsLoggedIn(true)}>
+              <Button
+                className={styles.LoggedInButton}
+                color="inherit"
+                onClick={handleLoginClick}
+              >
                 Login
               </Button>
             </Box>
