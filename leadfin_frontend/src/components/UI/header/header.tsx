@@ -9,10 +9,12 @@ import MenuItem from '@mui/material/MenuItem';
 import styles from './header.module.css';
 import { useUserStore } from '../../../storage/userStore';
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { user, logout, login } = useUserStore();
+  const navigate = useNavigate();
 
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -35,15 +37,15 @@ export default function Header() {
       role: 'client',
     };
 
-    login(mockUser.username); // Передаем только юзернейм
+    login(mockUser.username);
   };
 
   return (
-    <Box className={styles.Header}> 
-      <AppBar position="static" color='inherit'>
+    <Box className={styles.Header}>
+      <AppBar position="static" color="inherit">
         <Toolbar>
           {user ? (
-            <Box className={styles.MenuButton}> 
+            <Box className={styles.MenuButton}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -69,7 +71,14 @@ export default function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Личный кабинет</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    navigate('/client');
+                    handleClose();
+                  }}
+                >
+                  Личный кабинет
+                </MenuItem>
                 <MenuItem onClick={handleMenuItemClick}>Выйти</MenuItem>
               </Menu>
             </Box>
