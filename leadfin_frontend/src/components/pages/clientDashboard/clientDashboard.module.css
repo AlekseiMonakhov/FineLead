@@ -1,0 +1,21 @@
+.clientContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: #f0f0f0;
+}
+
+.button {
+  margin: 0 10px;
+  text-transform: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button.active {
+  font-weight: bold;
+  color: #000;
+}

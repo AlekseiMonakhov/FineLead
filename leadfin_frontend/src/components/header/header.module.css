@@ -1,0 +1,17 @@
+.Header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .MenuButton {
+    margin-left: auto;
+  }
+  
+  .LoggedInButton {
+    color: inherit;
+  }
+  
+  .LoggedInButton:hover {
+    text-decoration: underline;
+  }
+  

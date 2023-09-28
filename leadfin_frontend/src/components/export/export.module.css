@@ -1,0 +1,21 @@
+.exportContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  width: 80%;
+  margin: 20px auto 0;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.exportTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
