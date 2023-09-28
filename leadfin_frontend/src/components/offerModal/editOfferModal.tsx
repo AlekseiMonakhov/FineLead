@@ -22,6 +22,13 @@ interface EditOfferModalProps {
   selectedOffer: NewOffer | null;
 }
 
+const formatDate = (date: Date) => {
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+};
+
 export default function EditOfferModal({
   open,
   onClose,
@@ -40,6 +47,7 @@ export default function EditOfferModal({
       setEditedOffer((prevOffer) => ({
         ...prevOffer!,
         [name]: value,
+        modified: formatDate(new Date()), 
       }));
     }
   };
@@ -70,9 +78,7 @@ export default function EditOfferModal({
           p: 4,
         }}
       >
-        <h2 id="edit-offer-modal">
-        Изменить оффер
-        </h2>
+        <h2 id="edit-offer-modal">Изменить оффер</h2>
         {editedOffer && (
           <>
             <TextField

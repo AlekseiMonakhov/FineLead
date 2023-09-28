@@ -15,6 +15,9 @@ export interface NewOffer {
   clicks: number;
 }
 
+
+
+
 interface AddOfferModalProps {
   open: boolean;
   onClose: () => void;
@@ -46,22 +49,32 @@ export default function AddOfferModal({
   };
 
   const handleAddOfferClick = () => {
+    const currentDate = new Date();
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const year = currentDate.getFullYear();
+    const formattedDate = `${day}.${month}.${year}`;
+    
     onAddOffer({
       ...newOffer,
-      id: Date.now(), 
+      id: Date.now(),
+      created: formattedDate, 
     });
+  
     setNewOffer({
       id: 0,
       name: '',
       url: '',
       clickPrice: 0,
       country: '',
-      created: '',
+      created: '', 
       modified: '',
       clicks: 0,
     });
+  
     onClose();
   };
+
 
   return (
     <Modal
