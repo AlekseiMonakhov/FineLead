@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Chart from '../../UI/chart/chart';
-import StatisticTable from '../../UI/statisticTable/statisticTable';
-import Export from '../../UI/export/export'; 
+import Chart from '../../chart/chart';
 import Button from '@mui/material/Button';
-import styles from './clientDashboard.module.css'; 
+import styles from './clientDashboard.module.css';
+import StatisticTable from '../../statisticTable/statisticTable';
+import Export from '../../export/export';
 
 export default function ClientDashboard() {
-  const [activeTab, setActiveTab] = useState('statistics'); 
+  const [activeTab, setActiveTab] = useState('statistics');
 
   useEffect(() => {
     const savedTab = localStorage.getItem('activeTab');
@@ -25,24 +25,24 @@ export default function ClientDashboard() {
       <div className={styles.clientContainer}>
         <div className={styles.buttonContainer}>
           <Button
-            className={styles.button}
-            variant={activeTab === 'statistics' ? 'contained' : 'outlined'}
+            className={`${styles.button} ${activeTab === 'statistics' ? styles.active : ''}`}
+            variant="text"
             color="primary"
             onClick={() => handleTabClick('statistics')}
           >
             Статистика
           </Button>
           <Button
-            className={styles.button}
-            variant={activeTab === 'offers' ? 'contained' : 'outlined'}
+            className={`${styles.button} ${activeTab === 'offers' ? styles.active : ''}`}
+            variant="text"
             color="primary"
             onClick={() => handleTabClick('offers')}
           >
             Офферы
           </Button>
           <Button
-            className={styles.button}
-            variant={activeTab === 'export' ? 'contained' : 'outlined'}
+            className={`${styles.button} ${activeTab === 'export' ? styles.active : ''}`}
+            variant="text"
             color="primary"
             onClick={() => handleTabClick('export')}
           >

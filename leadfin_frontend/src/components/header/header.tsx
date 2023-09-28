@@ -7,9 +7,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import styles from './header.module.css';
-import { useUserStore } from '../../../storage/userStore';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '../../storage/userStore';
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
