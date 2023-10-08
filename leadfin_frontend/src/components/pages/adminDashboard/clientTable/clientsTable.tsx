@@ -15,8 +15,14 @@ import { columns, dataFromDatabase } from './mockData';
 export default function ClientsTable() {
   const [clients, setClients] = useState(dataFromDatabase);
 
+  const numberOfClients = dataFromDatabase.length;
+
   return (
     <div className={styles.container}>
+      <div className={styles.foundClients}>
+        Найдено {numberOfClients} рекламодателей
+      </div>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
