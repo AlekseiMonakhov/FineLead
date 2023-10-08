@@ -4,9 +4,14 @@ import ImportExportIcon from '@mui/icons-material/ImportExport';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
 import styles from './clientsTable.module.css';
-import  AddClient  from './addClient'
+import AddClient from './addClient';
 
-function TableHeader({ numberOfClients }: { numberOfClients: number }) {
+type TableHeaderProps = {
+  numberOfClients: number;
+  onEditColumns: () => void;
+};
+
+function TableHeader({ numberOfClients, onEditColumns }: TableHeaderProps) {
   const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
 
   const handleOpenAddClientModal = () => {
@@ -25,7 +30,7 @@ function TableHeader({ numberOfClients }: { numberOfClients: number }) {
         <Button startIcon={<ImportExportIcon />} className={styles.button}>
           Экспорт
         </Button>
-        <Button startIcon={<SettingsIcon />} className={styles.button}>
+        <Button startIcon={<SettingsIcon />} className={styles.button} onClick={onEditColumns}>
           Редактировать столбцы
         </Button>
         <Button startIcon={<AddIcon />} className={styles.button} onClick={handleOpenAddClientModal}>
