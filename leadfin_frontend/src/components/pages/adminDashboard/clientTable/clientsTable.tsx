@@ -6,11 +6,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
 import styles from './clientsTable.module.css';
 import { columns, dataFromDatabase } from './mockData';
+import TableHeader from './tableHeader'
 
 export default function ClientsTable() {
   const [clients, setClients] = useState(dataFromDatabase);
@@ -19,10 +17,7 @@ export default function ClientsTable() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.foundClients}>
-        Найдено {numberOfClients} рекламодателей
-      </div>
-
+      <TableHeader numberOfClients={numberOfClients} />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
