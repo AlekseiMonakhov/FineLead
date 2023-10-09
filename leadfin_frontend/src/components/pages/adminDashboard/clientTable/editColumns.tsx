@@ -66,9 +66,6 @@ const EditColumns: React.FC<EditColumnsProps> = ({ open, columns, onClose, onCol
                     ))}
                 </div>
                 <div className={styles.buttonContainer}>
-                    <Button variant="outlined" onClick={onClose} className={styles.button}>
-                        Отмена
-                    </Button>
                     <Button variant="contained" color="primary" onClick={handleApply} className={styles.button}>
                         Применить
                     </Button>

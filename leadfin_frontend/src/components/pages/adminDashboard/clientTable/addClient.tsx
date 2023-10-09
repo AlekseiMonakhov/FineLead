@@ -47,7 +47,7 @@ const AddClient: React.FC<AddClientProps> = ({ open, onClose }) => {
   return (
     <Modal open={open} onClose={onClose}>
       <div className={styles.modalContainer}>
-        <div className={`${styles.formSection} ${styles.horizontal}`}>
+        <div className={styles.formSection}>
           <h2>О рекламодателе</h2>
           <TextField
             name="companyName"
@@ -107,7 +107,7 @@ const AddClient: React.FC<AddClientProps> = ({ open, onClose }) => {
             onChange={handleChange}
           />
         </div>
-        <div className={`${styles.formSection} ${styles.horizontal}`}>
+        <div className={styles.formSection}>
           <h2>Информация о местоположении</h2>
           <TextField
             name="address1"
@@ -179,7 +179,7 @@ const AddClient: React.FC<AddClientProps> = ({ open, onClose }) => {
             startIcon={<AddIcon />}
             className={styles.addButton}
           >
-            Добавить рекламодателя
+            Добавить
           </Button>
         </div>
       </div>
