@@ -5,6 +5,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
 import styles from './clientsTable.module.css';
 import AddClient from './addClient';
+import ClientsExport from './clientsExport'; 
 
 type TableHeaderProps = {
   numberOfClients: number;
@@ -13,9 +14,14 @@ type TableHeaderProps = {
 
 function TableHeader({ numberOfClients, onEditColumns }: TableHeaderProps) {
   const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
+  const [isClientsExportModalOpen, setIsClientsExportModalOpen] = useState(false); // Добавьте состояние для модального окна ClientsExport
 
   const handleOpenAddClientModal = () => {
     setIsAddClientModalOpen(true);
+  };
+
+  const handleOpenClientsExportModal = () => {
+    setIsClientsExportModalOpen(true);
   };
 
   return (
@@ -27,8 +33,8 @@ function TableHeader({ numberOfClients, onEditColumns }: TableHeaderProps) {
         <Button startIcon={<ImportExportIcon />} className={styles.button}>
           Импорт
         </Button>
-        <Button startIcon={<ImportExportIcon />} className={styles.button}>
-          Экспорт
+        <Button startIcon={<ImportExportIcon />} className={styles.button} onClick={handleOpenClientsExportModal}>
+          Экспорт 
         </Button>
         <Button startIcon={<SettingsIcon />} className={styles.button} onClick={onEditColumns}>
           Редактировать столбцы
@@ -38,6 +44,7 @@ function TableHeader({ numberOfClients, onEditColumns }: TableHeaderProps) {
         </Button>
       </div>
       <AddClient open={isAddClientModalOpen} onClose={() => setIsAddClientModalOpen(false)} />
+      <ClientsExport open={isClientsExportModalOpen} onClose={() => setIsClientsExportModalOpen(false)} /> {/* Добавьте модальное окно ClientsExport */}
     </div>
   );
 }
