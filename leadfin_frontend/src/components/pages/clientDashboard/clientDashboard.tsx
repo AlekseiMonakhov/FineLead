@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Chart from '../../chart/chart';
+import Chart from './chart/chart';
 import Button from '@mui/material/Button';
 import styles from './clientDashboard.module.css';
-import StatisticTable from '../../statisticTable/statisticTable';
-import Export from '../../export/export';
+import StatisticTable from './statisticTable/statisticTable';
+import Export from './export/export';
 
 export default function ClientDashboard() {
   const [activeTab, setActiveTab] = useState('statistics');

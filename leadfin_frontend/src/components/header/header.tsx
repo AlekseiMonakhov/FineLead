@@ -34,7 +34,7 @@ export default function Header() {
     const mockUser = {
       username: 'mockUser',
       password: 'mockPassword',
-      role: 'client',
+      role: 'admin',
     };
 
     login(mockUser.username);
@@ -73,7 +73,7 @@ export default function Header() {
               >
                 <MenuItem
                   onClick={() => {
-                    navigate('/client');
+                    navigate('/admin');
                     handleClose();
                   }}
                 >

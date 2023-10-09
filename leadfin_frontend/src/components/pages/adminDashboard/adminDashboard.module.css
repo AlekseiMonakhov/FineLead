@@ -1,14 +1,21 @@
-.AdminDashboard{
-    text-align: center;
-  }
-  
-.AdminDashboard-header {
-  min-height: 80vh; 
+.adminContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  color: white;
-  }
+  align-items: center;
+  height: 60px;
+  background-color: #f0f0f0;
+}
 
-  
+.button {
+  margin: 0 10px;
+  text-transform: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button.active {
+  font-weight: bold;
+  color: #000;
+}
