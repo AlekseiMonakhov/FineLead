@@ -3,9 +3,10 @@ import Button from '@mui/material/Button';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
-import styles from './clientsTable.module.css';
+import styles from './tableHeader.module.css';
 import AddClient from './addClient';
-import ClientsExport from './clientsExport'; 
+import ClientsExport from './clientsExport';
+import ClientsImport from './clientsImport'; 
 
 type TableHeaderProps = {
   numberOfClients: number;
@@ -14,7 +15,8 @@ type TableHeaderProps = {
 
 function TableHeader({ numberOfClients, onEditColumns }: TableHeaderProps) {
   const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
-  const [isClientsExportModalOpen, setIsClientsExportModalOpen] = useState(false); // Добавьте состояние для модального окна ClientsExport
+  const [isClientsExportModalOpen, setIsClientsExportModalOpen] = useState(false);
+  const [isClientsImportModalOpen, setIsClientsImportModalOpen] = useState(false); // Добавьте состояние для модального окна ClientsImport
 
   const handleOpenAddClientModal = () => {
     setIsAddClientModalOpen(true);
@@ -24,13 +26,17 @@ function TableHeader({ numberOfClients, onEditColumns }: TableHeaderProps) {
     setIsClientsExportModalOpen(true);
   };
 
+  const handleOpenClientsImportModal = () => {
+    setIsClientsImportModalOpen(true);
+  };
+
   return (
     <div className={styles.header}>
       <div className={styles.foundClients}>
         Найдено {numberOfClients} рекламодателей
       </div>
       <div className={styles.buttons}>
-        <Button startIcon={<ImportExportIcon />} className={styles.button}>
+        <Button startIcon={<ImportExportIcon />} className={styles.button} onClick={handleOpenClientsImportModal}>
           Импорт
         </Button>
         <Button startIcon={<ImportExportIcon />} className={styles.button} onClick={handleOpenClientsExportModal}>
@@ -44,7 +50,8 @@ function TableHeader({ numberOfClients, onEditColumns }: TableHeaderProps) {
         </Button>
       </div>
       <AddClient open={isAddClientModalOpen} onClose={() => setIsAddClientModalOpen(false)} />
-      <ClientsExport open={isClientsExportModalOpen} onClose={() => setIsClientsExportModalOpen(false)} /> {/* Добавьте модальное окно ClientsExport */}
+      <ClientsExport open={isClientsExportModalOpen} onClose={() => setIsClientsExportModalOpen(false)} />
+      <ClientsImport open={isClientsImportModalOpen} onClose={() => setIsClientsImportModalOpen(false)} /> {/* Добавьте модальное окно ClientsImport */}
     </div>
   );
 }
