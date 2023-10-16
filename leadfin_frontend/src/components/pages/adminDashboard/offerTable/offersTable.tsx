@@ -10,24 +10,7 @@ import styles from './offersTable.module.css';
 import { dataFromDatabase } from './mockData';
 import TableHeader from './tableHeader';
 import EditColumns from './editColumns';
-
-const columnsMapping: Record<string, keyof typeof dataFromDatabase[0]> = {
-  'ID': 'id',
-  'Название': 'name',
-  'Категории': 'categories',
-  'Рекламодатель': 'client',
-  'Вебмастер': 'webmaster',
-  'Статус': 'status',
-  'Уровень приватности': 'privateLevel',
-  'CR за неделю': 'weekCr',
-  'Кэп': 'cap',
-  'Дневной лимит': 'dailyLimit',
-  'Общий лимит': 'totalLimit',
-  'За сегодня': 'today',
-  'Выплата': 'payment',
-  'Доход': 'income',
-  'Заметки': 'notes'
-};
+import { columnsMapping } from './mockData';
 
 const initialColumns: Record<string, boolean> = {
   'ID': true,

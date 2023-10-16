@@ -5,35 +5,20 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import styles from './clientsExport.module.css';
+import { columnsMapping } from './mockData';
 
 interface ClientsExportProps {
   open: boolean;
   onClose: () => void;
 }
 
-const columnMapping = {
-  'ID': 'id',
-  'Имя компании': 'companyName',
-  'Контактное лицо': 'contactPerson',
-  'Email': 'email',
-  'Способ связи': 'commMethod',
-  'Менеджер': 'manager',
-  'Сайт': 'website',
-  'Адрес 1': 'address1',
-  'Адрес 2': 'address2',
-  'Страна': 'country',
-  'Город': 'city',
-  'Код плательщика НДС': 'vatCode',
-  'Индекс': 'zipCode',
-  'Офферы': 'offers',
-};
 
 const ClientsExport: React.FC<ClientsExportProps> = ({ open, onClose }) => {
   const [selectedColumns, setSelectedColumns] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const initialSelectedColumns: Record<string, boolean> = {};
-    Object.keys(columnMapping).forEach((column) => {
+    Object.keys(columnsMapping).forEach((column) => {
       initialSelectedColumns[column] = true;
     });
     setSelectedColumns(initialSelectedColumns);
@@ -49,7 +34,7 @@ const ClientsExport: React.FC<ClientsExportProps> = ({ open, onClose }) => {
     onClose();
   };
 
-  const columns = Object.keys(columnMapping);
+  const columns = Object.keys(columnsMapping);
   const columnGroups = [];
   const groupSize = 5;
   for (let i = 0; i < columns.length; i += groupSize) {
