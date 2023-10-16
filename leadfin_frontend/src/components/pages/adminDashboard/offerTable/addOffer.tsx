@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Modal from '@mui/material/Modal';
 import AddIcon from '@mui/icons-material/Add';
 import styles from './addOffer.module.css';
@@ -11,31 +13,43 @@ interface AddClientProps {
   onClose: () => void;
 }
 
-const countryOptions = [
-  { value: 'РФ', label: 'РФ' },
-];
-
 const AddOffer: React.FC<AddClientProps> = ({ open, onClose }) => {
   const [formData, setFormData] = useState({
-    companyName: '',
-    email: '',
-    contactPerson: '',
-    commMethod: '',
-    manager: '',
-    website: '',
-    address1: '',
-    address2: '',
-    city: '',
-    country: 'РФ',
-    postalCode: '',
-    vatCode: '',
+    title: '',
+    note: '',
+    advertiser: '',
+    logo: null as File | null,
+    status: 'Активен',
+    sendEmail: false,
+    tags: '',
+    privacyLevel: 'Публичный',
+    scheduleEnabled: false,
+    startDate: '',
+    endDate: '',
+    timeZone: '',
+    categories: '',
+    trackingURL: '',
+    viewURL: '',
+    trafficBackURL: '',
+    trackingDomainURL: '',
+    redirectType: '302 редирект',
+    sessionLifetime: '',
+    minSessionLifetime: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    setFormData((prevData) => ({
+      ...prevData,
+      logo: file,
     }));
   };
 
@@ -47,130 +61,220 @@ const AddOffer: React.FC<AddClientProps> = ({ open, onClose }) => {
   return (
     <Modal open={open} onClose={onClose}>
       <div className={styles.modalContainer}>
-        <div className={styles.formSection}>
-          <h2>О рекламодателе</h2>
-          <TextField
-            name="companyName"
-            label="Имя компании"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.companyName}
-            onChange={handleChange}
+        <h2>Оффер</h2>
+        <TextField
+          name="title"
+          label="Заголовок"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.title}
+          onChange={handleChange}
+        />
+        <TextField
+          name="note"
+          label="Заметка"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.note}
+          onChange={handleChange}
+        />
+        <TextField
+          name="advertiser"
+          label="Рекламодатель"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.advertiser}
+          onChange={handleChange}
+        />
+        <div>
+          <input
+            accept=".png, .jpg, .jpeg"
+            style={{ display: 'none' }}
+            id="logo-upload"
+            type="file"
+            onChange={handleLogoChange}
           />
-          <TextField
-            name="email"
-            label="Email"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <TextField
-            name="contactPerson"
-            label="Контактное лицо"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.contactPerson}
-            onChange={handleChange}
-          />
-          <TextField
-            name="commMethod"
-            label="Способ связи"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.commMethod}
-            onChange={handleChange}
-          />
-          <TextField
-            name="manager"
-            label="Менеджер"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            select
-            value={formData.manager}
-            onChange={handleChange}
-          >
-            <MenuItem value="-">-</MenuItem>
-          </TextField>
-          <TextField
-            name="website"
-            label="Сайт"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.website}
-            onChange={handleChange}
-          />
+          <label htmlFor="logo-upload">
+            <Button variant="outlined" component="span">
+              Загрузить лого
+            </Button>
+            <p>png jpg jpeg 200*200</p>
+          </label>
+          {formData.logo && (
+            <div>
+              <img src={URL.createObjectURL(formData.logo)} alt="Лого" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+              
+            </div>
+          )}
         </div>
-        <div className={styles.formSection}>
-          <h2>Информация о местоположении</h2>
-          <TextField
-            name="address1"
-            label="Адрес 1"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.address1}
-            onChange={handleChange}
-          />
-          <TextField
-            name="address2"
-            label="Адрес 2"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.address2}
-            onChange={handleChange}
-          />
-          <TextField
-            name="city"
-            label="Город"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.city}
-            onChange={handleChange}
-          />
-          <TextField
-            name="country"
-            label="Страна"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            select
-            value={formData.country}
-            onChange={handleChange}
-          >
-            {countryOptions.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            name="postalCode"
-            label="Индекс"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.postalCode}
-            onChange={handleChange}
-          />
-          <TextField
-            name="vatCode"
-            label="Код НДС"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={formData.vatCode}
-            onChange={handleChange}
-          />
-        </div>
+        <TextField
+          name="status"
+          label="Статус"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          select
+          value={formData.status}
+          onChange={handleChange}
+        >
+          <MenuItem value="Активен">Активен</MenuItem>
+          <MenuItem value="Отключен">Отключен</MenuItem>
+        </TextField>
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="sendEmail"
+              checked={formData.sendEmail}
+              onChange={handleChange}
+            />
+          }
+          label="Отправить email активным вебмастерам об изменении статуса"
+        />
+        <TextField
+          name="tags"
+          label="Тэги"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.tags}
+          onChange={handleChange}
+        />
+        <TextField
+          name="privacyLevel"
+          label="Уровень приватности"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          select
+          value={formData.privacyLevel}
+          onChange={handleChange}
+        >
+          <MenuItem value="Приватный">Приватный</MenuItem>
+          <MenuItem value="Премодерация">Премодерация</MenuItem>
+          <MenuItem value="Публичный">Публичный</MenuItem>
+        </TextField>
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="scheduleEnabled"
+              checked={formData.scheduleEnabled}
+              onChange={handleChange}
+            />
+          }
+          label="Расписание"
+        />
+        {formData.scheduleEnabled && (
+          <>
+            <TextField
+              name="startDate"
+              label="Дата запуска"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={formData.startDate}
+              onChange={handleChange}
+            />
+            <TextField
+              name="endDate"
+              label="Дата отключения"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={formData.endDate}
+              onChange={handleChange}
+            />
+            <TextField
+              name="timeZone"
+              label="Часовой пояс"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={formData.timeZone}
+              onChange={handleChange}
+            />
+          </>
+        )}
+        <TextField
+          name="categories"
+          label="Категории"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.categories}
+          onChange={handleChange}
+        />
+        <TextField
+          name="trackingURL"
+          label="УРЛ трекинга"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.trackingURL}
+          onChange={handleChange}
+        />
+        <TextField
+          name="viewURL"
+          label="УРЛ просмотра"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.viewURL}
+          onChange={handleChange}
+        />
+        <TextField
+          name="trafficBackURL"
+          label="TrafficBack URL"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.trafficBackURL}
+          onChange={handleChange}
+        />
+        <TextField
+          name="trackingDomainURL"
+          label="Трекинг домен URL"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.trackingDomainURL}
+          onChange={handleChange}
+        />
+        <TextField
+          name="redirectType"
+          label="Тип редиректа"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          select
+          value={formData.redirectType}
+          onChange={handleChange}
+        >
+          <MenuItem value="302 редирект">302 редирект</MenuItem>
+          <MenuItem value="http meta-redirect">http meta-redirect</MenuItem>
+          <MenuItem value="JS meta-redirect">JS meta-redirect</MenuItem>
+          <MenuItem value="302 redirect with hidden refferer">302 redirect with hidden refferer</MenuItem>
+        </TextField>
+        <TextField
+          name="sessionLifetime"
+          label="Время жизни сессии клика и просмотра"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.sessionLifetime}
+          onChange={handleChange}
+        />
+        <TextField
+          name="minSessionLifetime"
+          label="Минимальное время жизни сессии клика и просмотра"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={formData.minSessionLifetime}
+          onChange={handleChange}
+        />
         <div className={styles.submitButtonContainer}>
           <Button
             variant="contained"
