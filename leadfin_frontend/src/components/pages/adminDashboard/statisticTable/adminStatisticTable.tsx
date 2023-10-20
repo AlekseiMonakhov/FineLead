@@ -41,19 +41,25 @@ const columnsMapping: Record<string, keyof DataItem> = {
   'Всего': 'Total',
 };
 
+const subColumnsMapper: Record<string, string> = {
+  'Count': 'Количество',
+  'Zero Conversions': 'Нулевые конверсии',
+  'Income': 'Доход',
+  'Hosts': 'Хосты',
+  'Clicks': 'Клики',
+};
+
 export default function AdminStatisticTable() {
   const headerColumns = Object.keys(columnsMapping);
 
-  // Функция для рендера подколонок в хедере
   const renderSubColumnsInHeader = (subColumns: ColumnData) => {
     return Object.keys(subColumns).map((subColumn) => (
       <TableCell key={subColumn}>
-        {subColumn}
+        {subColumnsMapper[subColumn] || subColumn}
       </TableCell>
     ));
   };
 
-  // Функция для рендера подколонок в таблице
   const renderSubColumnsInTable = (subColumns: ColumnData) => {
     return Object.keys(subColumns).map((subColumn) => (
       <TableCell key={subColumn}>

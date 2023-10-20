@@ -20,7 +20,7 @@
 .table th, .table td {
   padding: 8px 12px;
   text-align: left;
-  border-bottom: 1px solid #e0e0e0; /* Добавил разделительную линию между ячейками */
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .table th {
