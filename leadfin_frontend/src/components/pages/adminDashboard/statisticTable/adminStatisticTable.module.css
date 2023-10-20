@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  width: 90%;
+  margin: 20px auto 0;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th, .table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0; /* Добавил разделительную линию между ячейками */
+}
+
+.table th {
+  background-color: #f2f2f2;
+}

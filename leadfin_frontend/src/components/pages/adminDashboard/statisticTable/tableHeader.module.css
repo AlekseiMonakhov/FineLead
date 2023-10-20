@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: auto;
+    width: 90%;
+    margin: 20px auto 0;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .foundClients {
+    font-size: small;
+  }
+  
+  .buttons {
+    display: flex;
+  }
+  
+  .button {
+    margin-left: 10px;
+  }
+  

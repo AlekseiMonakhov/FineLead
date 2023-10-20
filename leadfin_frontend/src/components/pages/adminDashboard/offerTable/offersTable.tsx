@@ -6,11 +6,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import EditIcon from '@mui/icons-material/Edit';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
 import styles from './offersTable.module.css';
 import { dataFromDatabase } from './mockData';
 import TableHeader from './tableHeader';
 import EditColumns from './editColumns';
 import { columnsMapping } from './mockData';
+
+type YourOfferType = {
+  // Define your offer properties here
+};
 
 const initialColumns: Record<string, boolean> = {
   'ID': true,
@@ -27,18 +37,33 @@ const initialColumns: Record<string, boolean> = {
   'За сегодня': true,
   'Выплата': true,
   'Доход': true,
-  'Заметки': true
+  'Заметки': true,
 };
 
 export default function OffersTable() {
   const [offers, setOffers] = useState(dataFromDatabase);
   const [columns, setColumns] = useState<Record<string, boolean>>(initialColumns);
   const [editColumnsOpen, setEditColumnsOpen] = useState(false);
+  const [selectedOffer, setSelectedOffer] = useState<YourOfferType | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const numberOfOffers = dataFromDatabase.length;
 
   const handleColumnChange = (selectedColumns: Record<string, boolean>) => {
     setColumns(selectedColumns);
+  };
+
+  const handleStatistics = (row: YourOfferType) => {
+  };
+
+  const openEditModal = (row: YourOfferType) => {
+    setSelectedOffer(row);
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setSelectedOffer(null);
+    setIsEditModalOpen(false);
   };
 
   return (
@@ -71,6 +96,20 @@ export default function OffersTable() {
                     </TableCell>
                   )
                 ))}
+                <TableCell>
+                  <div>
+                    <Tooltip title="Статистика по офферу">
+                      <IconButton onClick={() => handleStatistics(row)}>
+                        <BarChartIcon />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Редактировать оффер и заметку">
+                      <IconButton onClick={() => openEditModal(row)}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -82,6 +121,15 @@ export default function OffersTable() {
         onClose={() => setEditColumnsOpen(false)}
         onColumnChange={handleColumnChange}
       />
+      <Modal
+        open={isEditModalOpen}
+        onClose={closeEditModal}
+      >
+        <div className={styles.editModal}>
+          <h2>Edit Offer</h2>
+          <Button onClick={closeEditModal}>Close</Button>
+        </div>
+      </Modal>
     </div>
   );
 }

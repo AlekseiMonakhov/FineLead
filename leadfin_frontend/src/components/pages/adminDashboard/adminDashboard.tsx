@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import styles from './adminDashboard.module.css';
 import ClientsTable from './clientTable/clientsTable';
 import OffersTable from './offerTable/offersTable';
+import AdminStatisticTable from './statisticTable/adminStatisticTable';
 
 export default function ClientDashboard() {
   const [activeTab, setActiveTab] = useState('statistics');
@@ -43,10 +44,22 @@ export default function ClientDashboard() {
             Офферы
           </Button>
         </div>
+        <div className={styles.buttonContainer}>
+          <Button
+            className={`${styles.button} ${activeTab === 'Статистика' ? styles.active : ''}`}
+            variant="text"
+            color="primary"
+            onClick={() => handleTabClick('statistic')}
+          >
+            Статистика
+          </Button>
+        </div>
+       
       </div>
       <div>
         {activeTab === 'clients' && <ClientsTable/>}
         {activeTab === 'offers' && <OffersTable/>}
+        {activeTab === 'statistic' && <AdminStatisticTable/>}
       </div>
     </div>
   );
