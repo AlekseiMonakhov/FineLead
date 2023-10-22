@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f6f8fa;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .errorIcon {
+    font-size: 100px;
+    color: #e57373;
+  }
+  
+  .title {
+    font-size: 64px;
+    margin: 20px 0;
+    color: #e57373;
+  }
+  
+  .description {
+    font-size: 24px;
+    color: #555;
+  }
+  

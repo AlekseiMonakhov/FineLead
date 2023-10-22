@@ -4,7 +4,7 @@ import { useUserStore } from './storage/userStore';
 import AdminDashboard from './components/pages/adminDashboard/adminDashboard';
 import ClientDashboard from './components/pages/clientDashboard/clientDashboard';
 import MainPage from './components/pages/mainPage/mainPage';
-import NotFound from './components/pages/notFound';
+import NotFound from './components/pages/notFound/notFound';
 import WebmasterDashboard from './components/pages/webmasterDashboard/webmasterDashboard';
 import Login from './components/auth/login';
 import Registration from './components/auth/registration';
