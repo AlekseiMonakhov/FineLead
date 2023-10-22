@@ -4,12 +4,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import CreateIcon from '@mui/icons-material/Create';
+import { EditOfferModalProps } from './interfaces';
 
-interface EditOfferModalProps {
-  open: boolean;
-  onClose: () => void;
-  offer: any
-}
 
 const EditOfferModal: React.FC<EditOfferModalProps> = ({ open, onClose, offer }) => {
   const [editOffer, setEditOffer] = useState(offer);
