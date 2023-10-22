@@ -23,6 +23,18 @@ export default function AdminStatisticTable() {
   const [columns, setColumns] = useState(initialColumnsState);
   const [editColumnsOpen, setEditColumnsOpen] = useState(false);
 
+  const computeSum = (dataKey: string, subColumn?: string) => {
+    return dataFromDatabase.reduce((sum, row) => {
+      const value = row[dataKey as keyof typeof row];
+      if (typeof value === 'object' && subColumn) {
+        return sum + (value[subColumn as keyof typeof value] || 0);
+      } else if (!subColumn) {
+        return sum + (value as any || 0);
+      }
+      return sum;
+    }, 0);
+  };
+
   const renderSubColumnsInHeader = (subColumns: ColumnData) => {
     return Object.keys(subColumns).map((subColumn) => (
       <TableCell key={subColumn}>
@@ -86,12 +98,31 @@ export default function AdminStatisticTable() {
                   const cellData = row[dataKey];
                   return (
                     columns[column] && (
-                      typeof cellData === 'object' ? renderSubColumnsInTable(cellData) : <TableCell>{cellData}</TableCell>
+                      typeof cellData === 'object' 
+                      ? renderSubColumnsInTable(cellData) 
+                      : <TableCell>{cellData}</TableCell>
                     )
                   );
                 })}
               </TableRow>
             ))}
+            <TableRow className={styles['sum-row']}>
+              {headerColumns.map((column) => {
+                const dataKey = columnsMapping[column];
+                if (!columns[column]) return null;
+                if (column === "День") {
+                  return <TableCell>Всего на странице</TableCell>;
+                }
+                const cellData = dataFromDatabase[0][dataKey];
+                if (typeof cellData === 'object') {
+                  return Object.keys(cellData).map((subColumn) => (
+                    <TableCell>{computeSum(dataKey, subColumn)}</TableCell>
+                  ));
+                } else {
+                  return <TableCell>{computeSum(dataKey)}</TableCell>;
+                }
+              })}
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
