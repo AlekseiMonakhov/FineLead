@@ -30,4 +30,10 @@ export interface StatisticExportProps {
 
   export interface TableHeaderProps {
     onEditColumns: () => void;
+    onAddCustomColumn: (columnDetails: any) => void; 
+};
+
+export interface ColumnDetails {
+    name: string;
+    formula: string;
   };

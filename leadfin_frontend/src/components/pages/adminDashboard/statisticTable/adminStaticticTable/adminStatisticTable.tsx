@@ -13,6 +13,11 @@ import { columnsMapping, subColumnsMapper } from '../mappers';
 import TableHeader from '../tableHeader/tableHeader';
 import EditColumns from '../editColumns/editColumns';
 
+type ColumnDetailsType = {
+  name: string;
+  formula: string;
+};
+
 export default function AdminStatisticTable() {
   const headerColumns = Object.keys(columnsMapping);
   const initialColumnsState: Record<string, boolean> = {};
@@ -22,6 +27,11 @@ export default function AdminStatisticTable() {
 
   const [columns, setColumns] = useState(initialColumnsState);
   const [editColumnsOpen, setEditColumnsOpen] = useState(false);
+  const [customColumns, setCustomColumns] = useState<ColumnDetailsType[]>([]);
+
+  const handleAddCustomColumn = (columnDetails: ColumnDetailsType) => {
+    setCustomColumns(prev => [...prev, columnDetails]);
+  };
 
   const computeSum = (dataKey: string, subColumn?: string) => {
     return dataFromDatabase.reduce((sum, row) => {
@@ -29,7 +39,7 @@ export default function AdminStatisticTable() {
       if (typeof value === 'object' && subColumn) {
         return sum + (value[subColumn as keyof typeof value] || 0);
       } else if (!subColumn) {
-        return sum + (value as any || 0);
+        return sum + (value as number || 0);
       }
       return sum;
     }, 0);
@@ -86,6 +96,7 @@ export default function AdminStatisticTable() {
     <div className={styles.container}>
       <TableHeader
         onEditColumns={() => setEditColumnsOpen(true)}
+        onAddCustomColumn={handleAddCustomColumn}
       />
       <TableContainer component={Paper}>
         <Table className={styles.table} aria-label="simple table">
