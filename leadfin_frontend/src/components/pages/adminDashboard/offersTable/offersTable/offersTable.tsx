@@ -70,7 +70,7 @@ export default function OffersTable() {
       />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
+          <TableHead className={styles.tableHeader}>
             <TableRow>
               {Object.keys(columns).map((column) => (
                 columns[column] && (
@@ -92,7 +92,7 @@ export default function OffersTable() {
                     </TableCell>
                   )
                 ))}
-                <TableCell>
+                <TableCell className={styles.tableHeader}>
                   <div>
                     <Tooltip title="Статистика по офферу">
                       <IconButton onClick={() => handleStatistics(row)}>

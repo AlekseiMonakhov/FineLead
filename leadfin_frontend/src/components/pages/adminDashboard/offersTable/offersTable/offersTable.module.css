@@ -19,6 +19,10 @@
   width: 100%;
 }
 
+.tableHeader {
+  background-color: #f2f2f2;
+}
+
 .foundClients {
   font-size: small;
 }

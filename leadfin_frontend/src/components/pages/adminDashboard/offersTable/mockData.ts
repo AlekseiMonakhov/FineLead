@@ -104,50 +104,5 @@ export const dataFromDatabase = [
     'income': '-',
     'notes': '-'
   },
-  {
-    'id': 8,
-    'name': 'Оффер8',
-    'categories': '-',
-    'client': 'Рекламодатель8',
-    'status': 'Активен',
-    'privacyLevel': 'Публичный',
-    'weekCr': 4.6,
-    'dailyLimit': '-',
-    'totalLimit': '-',
-    'today': 3,
-    'payment': 400,
-    'income': '-',
-    'notes': '-'
-  },
-  {
-    'id': 9,
-    'name': 'Оффер9',
-    'categories': '-',
-    'client': 'Рекламодатель9',
-    'status': 'Активен',
-    'privacyLevel': 'Публичный',
-    'weekCr': 3.8,
-    'dailyLimit': '-',
-    'totalLimit': '-',
-    'today': 1,
-    'payment': 280,
-    'income': '-',
-    'notes': '-'
-  },
-  {
-    'id': 10,
-    'name': 'Оффер10',
-    'categories': '-',
-    'client': 'Рекламодатель10',
-    'status': 'Активен',
-    'privacyLevel': 'Публичный',
-    'weekCr': 4.1,
-    'dailyLimit': '-',
-    'totalLimit': '-',
-    'today': 6,
-    'payment': 500,
-    'income': '-',
-    'notes': '-'
-  }
 ];
 
