@@ -1,12 +1,12 @@
-import { dataFromDatabase } from "./mockData";
+import { OfferData } from "./interfaces";
 
-export const columnsMapping: Record<string, keyof typeof dataFromDatabase[0]> = {
+export const columnsMapping: Record<string, keyof OfferData> = {
     'ID': 'id',
     'Название': 'name',
     'Категории': 'categories',
     'Рекламодатель': 'client',
     'Статус': 'status',
-    'Уровень приватности': 'privateLevel',
+    'Уровень приватности': 'privacyLevel',
     'CR за неделю': 'weekCr',
     'Дневной лимит': 'dailyLimit',
     'Общий лимит': 'totalLimit',

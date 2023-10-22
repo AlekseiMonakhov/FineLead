@@ -1,4 +1,4 @@
-import { DataItem } from "./interfaces";
+import { ColumnData, DataItem } from "./interfaces";
 
 export const columnsMapping: Record<string, keyof DataItem> = {
     'День': 'Day',
@@ -14,7 +14,7 @@ export const columnsMapping: Record<string, keyof DataItem> = {
     'Всего': 'Total',
 };
 
-export const subColumnsMapper: Record<string, string> = {
+export const subColumnsMapper: Record<string, keyof ColumnData> = {
     'Count': 'Количество',
     'Zero Conversions': 'Нулевые конверсии',
     'Income': 'Доход',

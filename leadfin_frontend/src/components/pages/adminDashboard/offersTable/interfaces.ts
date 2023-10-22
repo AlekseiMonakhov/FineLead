@@ -83,3 +83,19 @@ export interface FormStep4Props {
   };
   onChange: (field: string, value: string) => void;
 }
+
+export interface OfferData {
+  id: number;
+  name: string;
+  categories: string;
+  client: string;
+  status: string;
+  privacyLevel: string;
+  weekCr: number;
+  dailyLimit: string;
+  totalLimit: string;
+  today: number;
+  payment: number;
+  income: string;
+  notes: string;
+}

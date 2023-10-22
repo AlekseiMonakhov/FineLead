@@ -17,10 +17,8 @@ import { dataFromDatabase } from '../mockData';
 import TableHeader from '../tableHeader/tableHeader';
 import EditColumns from '../editColumns/editColumns';
 import { columnsMapping } from '../mappers';
+import { OfferData } from '../interfaces';
 
-type YourOfferType = {
-  // Define your offer properties here
-};
 
 const initialColumns: Record<string, boolean> = {
   'ID': true,
@@ -42,7 +40,7 @@ export default function OffersTable() {
   const [offers, setOffers] = useState(dataFromDatabase);
   const [columns, setColumns] = useState<Record<string, boolean>>(initialColumns);
   const [editColumnsOpen, setEditColumnsOpen] = useState(false);
-  const [selectedOffer, setSelectedOffer] = useState<YourOfferType | null>(null);
+  const [selectedOffer, setSelectedOffer] = useState<OfferData | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const numberOfOffers = dataFromDatabase.length;
@@ -51,10 +49,10 @@ export default function OffersTable() {
     setColumns(selectedColumns);
   };
 
-  const handleStatistics = (row: YourOfferType) => {
+  const handleStatistics = (row: OfferData) => {
   };
 
-  const openEditModal = (row: YourOfferType) => {
+  const openEditModal = (row: OfferData) => {
     setSelectedOffer(row);
     setIsEditModalOpen(true);
   };
