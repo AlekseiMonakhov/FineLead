@@ -1,56 +1,80 @@
 import React, { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { Dialog, DialogContent, DialogActions, TextField, Button, Grid } from '@mui/material';
+import Calculator from './calculator';
+import FieldsButton from './fieldsButton';
+import styled from '@emotion/styled';
 
-interface Props {
-  open: boolean;
-  onClose: () => void;
-  onSave: (columnDetails: { name: string, formula: string }) => void;
+interface CustomColumnModalProps {
+    open: boolean;
+    onClose: () => void;
+    onSave: (formula: string, columnName: string) => void;
 }
 
-function CustomColumnModal({ open, onClose, onSave }: Props) {
-  const [name, setName] = useState('');
-  const [formula, setFormula] = useState('');
+const StyledButton = styled(Button)`
+    padding: 8px 16px;
+    font-size: 16px;
+    min-width: 100px;
+`;
 
-  const handleSave = () => {
-    if(name && formula) {
-      onSave({ name, formula });
-      setName('');
-      setFormula('');
-      onClose();
+const CustomColumnModal: React.FC<CustomColumnModalProps> = ({ open, onClose, onSave }) => {
+    const [formula, setFormula] = useState('');
+    const [columnName, setColumnName] = useState('');
+
+    const handleCalculatorInput = (value: string) => {
+        if (value === 'C') {
+            setFormula('');
+        } else {
+            setFormula(prev => prev + value);
+        }
     }
-  };
 
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Создать кастомную колонку</DialogTitle>
-      <DialogContent>
-        <TextField
-          margin="dense"
-          label="Название"
-          fullWidth
-          variant="outlined"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Формула"
-          fullWidth
-          variant="outlined"
-          value={formula}
-          onChange={(e) => setFormula(e.target.value)}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="primary">
-          Отмена
-        </Button>
-        <Button onClick={handleSave} color="primary">
-          Сохранить
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
+    const handleFieldSelection = (field: string) => {
+        setFormula(prev => prev + field);
+    }
+
+    const handleSave = () => {
+        onSave(formula, columnName);
+        setFormula('');
+        setColumnName('');
+        onClose();
+    }
+
+    return (
+        <Dialog open={open} onClose={onClose} maxWidth="md">
+            <DialogContent>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Название"
+                            variant="outlined"
+                            fullWidth
+                            value={columnName}
+                            onChange={(e) => setColumnName(e.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Формула"
+                            variant="outlined"
+                            fullWidth
+                            value={formula}
+                            InputProps={{ readOnly: true }}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Calculator onInput={handleCalculatorInput} />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <FieldsButton onSelectField={handleFieldSelection} />
+                    </Grid>
+                </Grid>
+            </DialogContent>
+            <DialogActions>
+                <StyledButton onClick={handleSave} color="primary">Сохранить</StyledButton>
+                <StyledButton onClick={onClose} color="secondary">Отменить</StyledButton>
+            </DialogActions>
+        </Dialog>
+    );
 }
 
 export default CustomColumnModal;
