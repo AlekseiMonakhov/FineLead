@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Chart from '../clientDashboard/chart/chart';
 import Button from '@mui/material/Button';
 import styles from './adminDashboard.module.css';
-import ClientsTable from './clientTable/clientsTable';
-import OffersTable from './offerTable/offersTable';
-import AdminStatisticTable from './statisticTable/adminStatisticTable';
+import ClientsTable from './clientsTable/clientsTable/clientsTable';
+import OffersTable from './offersTable/offersTable/offersTable';
+import AdminStatisticTable from './statisticTable/adminStaticticTable/adminStatisticTable';
 
 export default function ClientDashboard() {
   const [activeTab, setActiveTab] = useState('statistics');

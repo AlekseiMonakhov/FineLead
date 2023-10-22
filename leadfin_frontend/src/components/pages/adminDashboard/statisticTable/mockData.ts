@@ -27,9 +27,9 @@ export const dataFromDatabase = [
       'Count': '20',
       'Income': '40',
     },
-    'CR': '5%',
-    'ERC': '3%',
-    'ECPM': '10%',
+    'CR': '5',
+    'ERC': '3',
+    'ECPM': '10',
     'Total': {
       'Count': '10000',
       'Zero Conversions': '200',
@@ -64,9 +64,9 @@ export const dataFromDatabase = [
       'Count': '25',
       'Income': '45',
     },
-    'CR': '5.5%',
-    'ERC': '3.5%',
-    'ECPM': '11%',
+    'CR': '5.5',
+    'ERC': '3.5',
+    'ECPM': '11',
     'Total': {
       'Count': '10500',
       'Zero Conversions': '250',
@@ -74,20 +74,6 @@ export const dataFromDatabase = [
     },
   },
 ];
-
-export const columnsMapping: Record<string, string> = {
-  'День': 'Day',
-  'Трафик': 'Traffic',
-  'Просмотры': 'Views',
-  'Статус "принято"': 'Status "Accepted"',
-  'Статус "холд"': 'Status "Hold"',
-  'Статус "в обработке"': 'Status "In Process"',
-  'Статус "отклонено"': 'Status "Rejected"',
-  'CR': 'CR',
-  'ERC': 'ERC',
-  'ECPM': 'ECPM',
-  'Всего': 'Total',
-};
 
 
 
