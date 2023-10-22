@@ -19,7 +19,7 @@ interface FormStep4Props {
     onChange: (field: string, value: string) => void;
 }
 
-const FormStep4: React.FC<FormStep4Props> = ({ data, onChange }) => (
+export const FormStep4: React.FC<FormStep4Props> = ({ data, onChange }) => (
     <>
         <TextField
             name="countries"
@@ -123,4 +123,17 @@ const FormStep4: React.FC<FormStep4Props> = ({ data, onChange }) => (
     </>
 );
 
-export default FormStep4;
+export const defaultStep4Data = {
+    countries: '',
+    regions: '',
+    cities: '',
+    connectionType: '',
+    operatingSystem: '',
+    mobileOperators: '',
+    devices: '',
+    deviceManufacturers: '',
+    browsers: '',
+    ipRange: '',
+    postalCodes: '',
+}
+

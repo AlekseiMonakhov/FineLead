@@ -12,7 +12,7 @@ interface FormStep1Props {
   onChange: (field: string, value: string) => void;
 }
 
-const FormStep1: React.FC<FormStep1Props> = ({ data, onChange }) => (
+export const FormStep1: React.FC<FormStep1Props> = ({ data, onChange }) => (
   <>
     <TextField
       name="title"
@@ -53,4 +53,9 @@ const FormStep1: React.FC<FormStep1Props> = ({ data, onChange }) => (
   </>
 );
 
-export default FormStep1;
+export const defaultStep1Data = {
+  title: '',
+  note: '',
+  advertiser: '',
+  kpi: '',
+}

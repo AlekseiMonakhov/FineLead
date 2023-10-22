@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Modal from '@mui/material/Modal';
-import FormStep1 from './formStep1';
-import FormStep2 from './formStep2';
-import FormStep3 from './formStep3';
-import FormStep4 from './formStep4';
 import NavigationButtons from './navigationButtons';
-import styles from './addOffer.module.css'; // Подключение стилей
+import styles from './addOffer.module.css';
+import { defaultStep1Data, FormStep1 } from './formStep1';
+import { defaultStep2Data, FormStep2 } from './formStep2';
+import { defaultStep3Data, FormStep3 } from './formStep3';
+import { defaultStep4Data, FormStep4 } from './formStep4';
 
 interface AddOfferFormProps {
   open: boolean;
@@ -15,52 +15,10 @@ interface AddOfferFormProps {
 const AddOfferForm: React.FC<AddOfferFormProps> = ({ open, onClose }) => {
   const [currentStep, setCurrentStep] = useState(1);
 
-  const [step1Data, setStep1Data] = useState({
-    title: '',
-    note: '',
-    advertiser: '',
-    kpi: '',
-  });
-
-  const [step2Data, setStep2Data] = useState({
-    logo: null as File | null,
-    status: 'Активен',
-    sendEmailStatusChange: false,
-    tags: '',
-    privacyLevel: 'Публичный',
-    scheduleEnabled: false,
-    startDate: '',
-    endDate: '',
-    timeZone: '',
-    statusAfterStop: '',
-    privacyLevelAfterStop: 'Публичный',
-    sendEmailStatusChangeBeforeStop: false,
-    sendEmailTime: '',
-    categories: '',
-  });
-
-  const [step3Data, setStep3Data] = useState({
-    trackingURL: '',
-    viewURL: '',
-    trafficBackURL: '',
-    trackingDomainURL: '',
-    sessionLifetime: '',
-    minSessionLifetime: '',
-  });
-
-  const [step4Data, setStep4Data] = useState({
-    countries: '',
-    regions: '',
-    cities: '',
-    connectionType: '',
-    operatingSystem: '',
-    mobileOperators: '',
-    devices: '',
-    deviceManufacturers: '',
-    browsers: '',
-    ipRange: '',
-    postalCodes: '',
-  });
+  const [step1Data, setStep1Data] = useState(defaultStep1Data);
+  const [step2Data, setStep2Data] = useState(defaultStep2Data);
+  const [step3Data, setStep3Data] = useState(defaultStep3Data);
+  const [step4Data, setStep4Data] = useState(defaultStep4Data);
 
   const handleNextStep = () => {
     if (currentStep < 4) {
@@ -81,8 +39,12 @@ const AddOfferForm: React.FC<AddOfferFormProps> = ({ open, onClose }) => {
       ...step3Data,
       ...step4Data,
     };
-
     console.log(formData);
+    setStep1Data(defaultStep1Data);
+    setStep2Data(defaultStep2Data);
+    setStep3Data(defaultStep3Data);
+    setStep4Data(defaultStep4Data);
+    setCurrentStep(1);
     onClose();
   };
 
