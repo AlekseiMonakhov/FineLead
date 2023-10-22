@@ -99,3 +99,9 @@ export interface OfferData {
   income: string;
   notes: string;
 }
+
+export interface EditOfferModalProps extends OfferProps {
+  offer: OfferData
+}
+
+
