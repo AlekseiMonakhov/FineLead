@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,10 +10,18 @@ import styles from './adminStatisticTable.module.css';
 import { dataFromDatabase } from '../mockData';
 import { ColumnData } from '../interfaces';
 import { columnsMapping, subColumnsMapper } from '../mappers';
-
+import TableHeader from '../tableHeader/tableHeader';
+import EditColumns from '../editColumns/editColumns';
 
 export default function AdminStatisticTable() {
   const headerColumns = Object.keys(columnsMapping);
+  const initialColumnsState: Record<string, boolean> = {};
+  headerColumns.forEach((column) => {
+    initialColumnsState[column] = true;
+  });
+
+  const [columns, setColumns] = useState(initialColumnsState);
+  const [editColumnsOpen, setEditColumnsOpen] = useState(false);
 
   const renderSubColumnsInHeader = (subColumns: ColumnData) => {
     return Object.keys(subColumns).map((subColumn) => (
@@ -37,11 +45,12 @@ export default function AdminStatisticTable() {
         {headerColumns.map((column) => {
           const dataKey = columnsMapping[column];
           const cellData = dataFromDatabase[0][dataKey];
-
           return (
-            <TableCell key={column} colSpan={typeof cellData === 'object' ? Object.keys(cellData).length : 1}>
-              <strong>{column}</strong>
-            </TableCell>
+            columns[column] && (
+              <TableCell key={column} colSpan={typeof cellData === 'object' ? Object.keys(cellData).length : 1}>
+                <strong>{column}</strong>
+              </TableCell>
+            )
           );
         })}
       </TableRow>
@@ -49,11 +58,12 @@ export default function AdminStatisticTable() {
         {headerColumns.map((column) => {
           const dataKey = columnsMapping[column];
           const cellData = dataFromDatabase[0][dataKey];
-
           if (typeof cellData === 'object') {
-            return renderSubColumnsInHeader(cellData);
+            return columns[column] && (
+              renderSubColumnsInHeader(cellData)
+            );
           } else {
-            return <TableCell />;
+            return columns[column] && <TableCell />;
           }
         })}
       </TableRow>
@@ -62,6 +72,9 @@ export default function AdminStatisticTable() {
 
   return (
     <div className={styles.container}>
+      <TableHeader
+        onEditColumns={() => setEditColumnsOpen(true)}
+      />
       <TableContainer component={Paper}>
         <Table className={styles.table} aria-label="simple table">
           {tableHead}
@@ -71,18 +84,23 @@ export default function AdminStatisticTable() {
                 {headerColumns.map((column) => {
                   const dataKey = columnsMapping[column];
                   const cellData = row[dataKey];
-
-                  if (typeof cellData === 'object') {
-                    return renderSubColumnsInTable(cellData);
-                  } else {
-                    return <TableCell>{cellData}</TableCell>;
-                  }
+                  return (
+                    columns[column] && (
+                      typeof cellData === 'object' ? renderSubColumnsInTable(cellData) : <TableCell>{cellData}</TableCell>
+                    )
+                  );
                 })}
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <EditColumns
+        open={editColumnsOpen}
+        columns={columns}
+        onClose={() => setEditColumnsOpen(false)}
+        onColumnChange={(selectedColumns) => setColumns(selectedColumns)}
+      />
     </div>
   );
 }
