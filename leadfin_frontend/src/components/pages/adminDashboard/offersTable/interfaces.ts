@@ -3,6 +3,10 @@ export interface OfferProps {
   onClose: () => void;
 }
 
+export interface OffersExportProps extends OfferProps {}
+
+export interface AddOfferFormProps extends OfferProps {}
+
 export interface EditColumnsProps extends OfferProps {
   columns: Record<string, boolean>;
   onColumnChange: (selectedColumns: Record<string, boolean>) => void;
@@ -20,54 +24,62 @@ export interface NavigationButtonsProps {
   onSubmit: () => void;
 }
 
-export interface FormStepProps<T> {
-  data: T;
-  onChange: (field: string, value: T[keyof T]) => void;
+export interface FormStep1Props {
+  data: {
+      title: string;
+      note: string;
+      advertiser: string;
+      kpi: string;
+  };
+  onChange: (field: string, value: string) => void;
 }
 
-export interface FormStep1Props extends FormStepProps<{
-  title: string;
-  note: string;
-  advertiser: string;
-  kpi: string;
-}> {}
+export interface FormStep2Props {
+  data: {
+      logo: File | null;
+      status: string;
+      sendEmailStatusChange: boolean;
+      tags: string;
+      privacyLevel: string;
+      scheduleEnabled: boolean;
+      startDate: string;
+      endDate: string;
+      timeZone: string;
+      statusAfterStop: string;
+      privacyLevelAfterStop: string;
+      sendEmailStatusChangeBeforeStop: boolean;
+      sendEmailTime: string;
+      categories: string;
+  };
+  onChange: (field: string, value: any) => void;
+  onLogoUpload: (file: File | null) => void;
+}
 
-export interface FormStep2Props extends FormStepProps<{
-  logo: File | null;
-  status: string;
-  sendEmailStatusChange: boolean;
-  tags: string;
-  privacyLevel: string;
-  scheduleEnabled: boolean;
-  startDate: string;
-  endDate: string;
-  timeZone: string;
-  statusAfterStop: string;
-  privacyLevelAfterStop: string;
-  sendEmailStatusChangeBeforeStop: boolean;
-  sendEmailTime: string;
-  categories: string;
-}> {}
+export interface FormStep3Props {
+  data: {
+      trackingURL: string;
+      viewURL: string;
+      trafficBackURL: string;
+      trackingDomainURL: string;
+      sessionLifetime: string;
+      minSessionLifetime: string;
+  };
+  onChange: (field: string, value: string) => void;
+}
 
-export interface FormStep3Props extends FormStepProps<{
-  trackingURL: string;
-  viewURL: string;
-  trafficBackURL: string;
-  trackingDomainURL: string;
-  sessionLifetime: string;
-  minSessionLifetime: string;
-}> {}
-
-export interface FormStep4Props extends FormStepProps<{
-  countries: string;
-  regions: string;
-  cities: string;
-  connectionType: string;
-  operatingSystem: string;
-  mobileOperators: string;
-  devices: string;
-  deviceManufacturers: string;
-  browsers: string;
-  ipRange: string;
-  postalCodes: string;
-}> {}
+export interface FormStep4Props {
+  data: {
+      countries: string;
+      regions: string;
+      cities: string;
+      connectionType: string;
+      operatingSystem: string;
+      mobileOperators: string;
+      devices: string;
+      deviceManufacturers: string;
+      browsers: string;
+      ipRange: string;
+      postalCodes: string;
+  };
+  onChange: (field: string, value: string) => void;
+}
