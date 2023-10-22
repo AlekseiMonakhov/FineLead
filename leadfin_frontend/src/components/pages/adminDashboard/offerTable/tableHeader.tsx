@@ -4,7 +4,7 @@ import ImportExportIcon from '@mui/icons-material/ImportExport';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
 import styles from './tableHeader.module.css';
-import AddOffer from './addOffer';
+import AddOffer from './addOffer/addOffer';
 import OfferExport from './offerExport';
 
 type TableHeaderProps = {
