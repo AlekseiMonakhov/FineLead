@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import styles from './header.module.css';
@@ -42,8 +43,11 @@ export default function Header() {
 
   return (
     <Box className={styles.Header}>
-      <AppBar position="static" color="inherit">
+      <AppBar position="static" color="primary">
         <Toolbar>
+          <Typography variant="h6" className={styles.title}>
+            LeadFin
+          </Typography>
           {user ? (
             <Box className={styles.MenuButton}>
               <IconButton
