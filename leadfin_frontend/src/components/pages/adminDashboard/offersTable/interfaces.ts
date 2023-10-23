@@ -100,7 +100,7 @@ export interface OfferData {
   notes: string;
 }
 
-export interface EditOfferModalProps extends OfferProps {
+export interface EditOfferProps extends OfferProps {
   offer: OfferData
 }
 

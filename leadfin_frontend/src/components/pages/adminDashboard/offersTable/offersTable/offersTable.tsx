@@ -93,7 +93,7 @@ export default function OffersTable() {
                         <BarChartIcon />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Редактировать оффер и заметку">
+                    <Tooltip title="Редактировать оффер">
                       <IconButton onClick={() => openEditModal(row)}>
                         <EditIcon />
                       </IconButton>

@@ -1,10 +1,14 @@
 import React from "react";
 import styles from "./export.module.css";
+import BuildIcon from '@mui/icons-material/Build';
 
 export default function Export() {
   return (
     <div className={styles.exportContainer}>
-      <h1 className={styles.exportTitle}>Export coming soon...</h1>
+      <header className={styles.header}>
+        <BuildIcon className={styles.icon} />
+        <a className={styles.title}>Ведутся работы</a>
+      </header>
     </div>
   );
 }
