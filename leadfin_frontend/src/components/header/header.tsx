@@ -9,8 +9,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import styles from './header.module.css';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useUserStore } from '../../storage/userStore';
+import logo from './logo.svg'
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -31,7 +32,6 @@ export default function Header() {
   };
 
   const handleLoginClick = () => {
-    // Моковая авторизация
     const mockUser = {
       username: 'mockUser',
       password: 'mockPassword',
@@ -45,9 +45,12 @@ export default function Header() {
     <Box className={styles.Header}>
       <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="h6" className={styles.title}>
-            LeadFin
-          </Typography>
+          <Link to="/" className={styles.logoLink}>
+            <img src={logo} alt="LeadFin Logo" className={styles.logo} />
+            <Typography variant="h6" className={styles.title}>
+              LeadFin
+            </Typography>
+          </Link>
           {user ? (
             <Box className={styles.MenuButton}>
               <IconButton
