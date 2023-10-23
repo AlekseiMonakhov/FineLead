@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogActions, TextField, Button, Grid } from '@mui/material';
 import Calculator from './calculator';
 import FieldsButton from './fieldsButton';
-import styled from '@emotion/styled';
+import styles from './customColumn.module.css'
 
 interface CustomColumnModalProps {
     open: boolean;
@@ -10,13 +10,7 @@ interface CustomColumnModalProps {
     onSave: (formula: string, columnName: string) => void;
 }
 
-const StyledButton = styled(Button)`
-    padding: 8px 16px;
-    font-size: 16px;
-    min-width: 100px;
-`;
-
-const CustomColumnModal: React.FC<CustomColumnModalProps> = ({ open, onClose, onSave }) => {
+const CustomColumn: React.FC<CustomColumnModalProps> = ({ open, onClose, onSave }) => {
     const [formula, setFormula] = useState('');
     const [columnName, setColumnName] = useState('');
 
@@ -70,11 +64,12 @@ const CustomColumnModal: React.FC<CustomColumnModalProps> = ({ open, onClose, on
                 </Grid>
             </DialogContent>
             <DialogActions>
-                <StyledButton onClick={handleSave} color="primary">Сохранить</StyledButton>
-                <StyledButton onClick={onClose} color="secondary">Отменить</StyledButton>
+                <Button className={styles.button} variant="contained"
+                    onClick={handleSave}>Сохранить</Button>
+                <Button className={styles.button} variant="outlined" onClick={onClose}>Отменить</Button>
             </DialogActions>
         </Dialog>
     );
 }
 
-export default CustomColumnModal;
+export default CustomColumn;

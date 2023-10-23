@@ -11,7 +11,7 @@ const fields = [
 
 const FieldsButton: React.FC<FieldsButtonProps> = ({ onSelectField }) => {
     return (
-        <ButtonGroup variant="outlined" fullWidth>
+        <ButtonGroup variant="contained" fullWidth>
             {fields.map((field) => (
                 <Button key={field} onClick={() => onSelectField(field)}>{field}</Button>
             ))}

@@ -4,10 +4,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import CreateIcon from '@mui/icons-material/Create';
-import { EditOfferModalProps } from './interfaces';
+import { EditOfferProps } from './interfaces';
 
 
-const EditOfferModal: React.FC<EditOfferModalProps> = ({ open, onClose, offer }) => {
+const EditOffer: React.FC<EditOfferProps> = ({ open, onClose, offer }) => {
   const [editOffer, setEditOffer] = useState(offer);
 
   const handleSave = () => {
@@ -54,4 +54,4 @@ const EditOfferModal: React.FC<EditOfferModalProps> = ({ open, onClose, offer })
   );
 };
 
-export default EditOfferModal;
+export default EditOffer;

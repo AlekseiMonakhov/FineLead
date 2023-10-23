@@ -42,8 +42,8 @@ export default function Header() {
   };
 
   return (
-    <Box className={styles.Header}>
-      <AppBar position="static" color="primary">
+    <Box className={styles.header}>
+      <AppBar position="static" color="inherit">
         <Toolbar>
           <Link to="/" className={styles.logoLink}>
             <img src={logo} alt="LeadFin Logo" className={styles.logo} />

@@ -1,9 +1,9 @@
-.Page {
+.page {
   text-align: center;
   height: 100vh; 
 }
 
-.Page-header {
+.page-header {
   min-height: 80vh;
   display: flex;
   flex-direction: column;

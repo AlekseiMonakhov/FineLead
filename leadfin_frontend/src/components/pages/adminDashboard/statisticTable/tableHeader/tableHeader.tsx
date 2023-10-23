@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import styles from './tableHeader.module.css';
 import OfferExport from '../statisticExport/statisticExport';
 import { TableHeaderProps } from '../interfaces';
-import CustomColumnModal from '../castomColumnModal/castomColumnModal';
+import CustomColumnModal from '../castomColumn/customColumn';
 
 function TableHeader({ onEditColumns, onAddCustomColumn }: TableHeaderProps) {
   const [isAddOfferModalOpen, setIsAddOfferModalOpen] = useState(false);

@@ -1,21 +1,22 @@
 .exportContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: auto;
-  width: 80%;
-  margin: 20px auto 0;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: white;
-  border-radius: 20px;
+  text-align: center;
+  height: 100vh; 
 }
 
-.exportTitle {
-  font-size: 18px;
-  font-weight: bold;
+.header {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgb(5, 0, 0);
+}
+
+.title {
+  font-size: 48px;
   margin-bottom: 20px;
-  text-align: center;
-  width: 100%;
+}
+
+.icon {
+  margin-bottom: 20px;
 }

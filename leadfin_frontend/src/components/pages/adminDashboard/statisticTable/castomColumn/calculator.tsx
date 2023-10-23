@@ -11,7 +11,7 @@ const Calculator: React.FC<CalculatorProps> = ({ onInput }) => {
             {['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', '.', '+', '-', '*', '/', 'C'].map((value) => (
                 <Grid item xs={4} key={value}>
                     <Button
-                        variant="outlined"
+                        variant="contained"
                         fullWidth
                         onClick={() => onInput(value)}
                     >
