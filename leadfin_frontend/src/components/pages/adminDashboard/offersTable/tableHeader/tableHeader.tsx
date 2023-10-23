@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import ImportExportIcon from '@mui/icons-material/ImportExport';
+import GetAppIcon from '@mui/icons-material/GetApp';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
 import styles from './tableHeader.module.css';
@@ -28,14 +28,11 @@ function TableHeader({ numberOfOffers, onEditColumns }: TableHeaderProps) {
         Найдено {numberOfOffers} офферов
       </div>
       <div className={styles.buttons}>
-        <Button startIcon={<ImportExportIcon />} className={styles.button} onClick={handleOpenOfferExportModal}>
-          Экспорт 
+        <Button startIcon={<GetAppIcon />} className={styles.button} onClick={handleOpenOfferExportModal}>
         </Button>
         <Button startIcon={<SettingsIcon />} className={styles.button} onClick={onEditColumns}>
-          Редактировать столбцы
         </Button>
         <Button startIcon={<AddIcon />} className={styles.button} onClick={handleOpenAddOfferModal}>
-          Добавить оффер
         </Button>
       </div>
       <AddOffer open={isAddOfferModalOpen} onClose={() => setIsAddOfferModalOpen(false)} />

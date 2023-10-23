@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import ImportExportIcon from '@mui/icons-material/ImportExport';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import PublishIcon from '@mui/icons-material/Publish';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
 import styles from './tableHeader.module.css';
 import AddClient from '../addClient/addClient';
 import ClientsExport from '../clientsExport/clientsExport';
-import ClientsImport from '../clientsImport/clientsImport'; 
+import ClientsImport from '../clientsImport/clientsImport';
 import { TableHeaderProps } from '../interfaces';
 
 
 function TableHeader({ numberOfClients, onEditColumns }: TableHeaderProps) {
   const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
   const [isClientsExportModalOpen, setIsClientsExportModalOpen] = useState(false);
-  const [isClientsImportModalOpen, setIsClientsImportModalOpen] = useState(false); 
+  const [isClientsImportModalOpen, setIsClientsImportModalOpen] = useState(false);
 
   const handleOpenAddClientModal = () => {
     setIsAddClientModalOpen(true);
@@ -33,17 +34,13 @@ function TableHeader({ numberOfClients, onEditColumns }: TableHeaderProps) {
         Найдено {numberOfClients} рекламодателей
       </div>
       <div className={styles.buttons}>
-        <Button startIcon={<ImportExportIcon />} className={styles.button} onClick={handleOpenClientsImportModal}>
-          Импорт
+        <Button startIcon={<PublishIcon />} className={styles.button} onClick={handleOpenClientsImportModal}>
         </Button>
-        <Button startIcon={<ImportExportIcon />} className={styles.button} onClick={handleOpenClientsExportModal}>
-          Экспорт 
+        <Button startIcon={<GetAppIcon />} className={styles.button} onClick={handleOpenClientsExportModal}>
         </Button>
         <Button startIcon={<SettingsIcon />} className={styles.button} onClick={onEditColumns}>
-          Редактировать столбцы
         </Button>
         <Button startIcon={<AddIcon />} className={styles.button} onClick={handleOpenAddClientModal}>
-          Добавить рекламодателя
         </Button>
       </div>
       <AddClient open={isAddClientModalOpen} onClose={() => setIsAddClientModalOpen(false)} />
