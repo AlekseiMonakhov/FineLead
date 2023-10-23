@@ -19,7 +19,6 @@ import EditColumns from '../editColumns/editColumns';
 import { columnsMapping } from '../mappers';
 import { OfferData } from '../interfaces';
 
-
 const initialColumns: Record<string, boolean> = {
   'ID': true,
   'Название': true,
@@ -49,8 +48,7 @@ export default function OffersTable() {
     setColumns(selectedColumns);
   };
 
-  const handleStatistics = (row: OfferData) => {
-  };
+  const handleStatistics = (row: OfferData) => {};
 
   const openEditModal = (row: OfferData) => {
     setSelectedOffer(row);
@@ -72,26 +70,22 @@ export default function OffersTable() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead className={styles.tableHeader}>
             <TableRow>
-              {Object.keys(columns).map((column) => (
-                columns[column] && (
-                  <TableCell key={column}>{column}</TableCell>
-                )
-              ))}
+              {Object.keys(columns).map((column) =>
+                columns[column] && <TableCell key={column}>{column}</TableCell>
+              )}
+              <TableCell className={styles.tableHeader}></TableCell> {/* Применён стиль tableHeader к этой ячейке */}
             </TableRow>
           </TableHead>
           <TableBody>
             {offers.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                {Object.keys(columns).map((column) => (
+              <TableRow key={row.id}>
+                {Object.keys(columns).map((column) =>
                   columns[column] && (
                     <TableCell key={column}>
                       {row[columnsMapping[column]]}
                     </TableCell>
                   )
-                ))}
+                )}
                 <TableCell className={styles.tableHeader}>
                   <div>
                     <Tooltip title="Статистика по офферу">
@@ -117,10 +111,7 @@ export default function OffersTable() {
         onClose={() => setEditColumnsOpen(false)}
         onColumnChange={handleColumnChange}
       />
-      <Modal
-        open={isEditModalOpen}
-        onClose={closeEditModal}
-      >
+      <Modal open={isEditModalOpen} onClose={closeEditModal}>
         <div className={styles.editModal}>
           <h2>Edit Offer</h2>
           <Button onClick={closeEditModal}>Close</Button>
