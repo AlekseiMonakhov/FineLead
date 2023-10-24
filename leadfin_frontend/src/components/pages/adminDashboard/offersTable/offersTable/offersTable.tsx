@@ -15,9 +15,9 @@ import Button from '@mui/material/Button';
 import styles from './offersTable.module.css';
 import { dataFromDatabase } from '../mockData';
 import TableHeader from '../tableHeader/tableHeader';
-import EditColumns from '../editColumns/editColumns';
 import { columnsMapping } from '../mappers';
 import { OfferData } from '../interfaces';
+import EditColumns from '../../../../UI/editColumnsModal/editColumns';
 
 const initialColumns: Record<string, boolean> = {
   'ID': true,

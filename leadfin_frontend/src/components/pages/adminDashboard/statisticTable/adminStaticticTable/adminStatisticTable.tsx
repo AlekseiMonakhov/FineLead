@@ -11,7 +11,7 @@ import { dataFromDatabase } from '../mockData';
 import { ColumnData } from '../interfaces';
 import { columnsMapping, subColumnsMapper } from '../mappers';
 import TableHeader from '../tableHeader/tableHeader';
-import EditColumns from '../editColumns/editColumns';
+import EditColumns from '../../../../UI/editColumnsModal/editColumns';
 
 type ColumnDetailsType = {
   name: string;

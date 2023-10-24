@@ -9,8 +9,8 @@ import Paper from '@mui/material/Paper';
 import styles from './clientsTable.module.css';
 import { dataFromDatabase } from '../mockData';
 import TableHeader from '../tableHeader/tableHeader';
-import EditColumns from '../editColumns/editColumns';
 import { columnsMapping } from '../mappers';
+import EditColumns from '../../../../UI/editColumnsModal/editColumns';
 
 const initialColumns: Record<string, boolean> = {
   'Имя компании': true,
