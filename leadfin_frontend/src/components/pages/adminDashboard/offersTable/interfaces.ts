@@ -7,11 +7,6 @@ export interface OffersExportProps extends OfferProps {}
 
 export interface AddOfferFormProps extends OfferProps {}
 
-export interface EditColumnsProps extends OfferProps {
-  columns: Record<string, boolean>;
-  onColumnChange: (selectedColumns: Record<string, boolean>) => void;
-}
-
 export interface TableHeaderProps {
   numberOfOffers: number;
   onEditColumns: () => void;
