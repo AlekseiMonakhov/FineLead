@@ -5,6 +5,7 @@ import styles from './adminDashboard.module.css';
 import ClientsTable from './clientsTable/clientsTable/clientsTable';
 import OffersTable from './offersTable/offersTable/offersTable';
 import AdminStatisticTable from './statisticTable/adminStaticticTable/adminStatisticTable';
+import Dashboard from './dashboard/dashboard';
 
 export default function ClientDashboard() {
   const [activeTab, setActiveTab] = useState('statistics');
@@ -24,6 +25,16 @@ export default function ClientDashboard() {
   return (
     <div>
       <div className={styles.adminContainer}>
+      <div className={styles.buttonContainer}>
+          <Button
+            className={`${styles.button} ${activeTab === 'Дашборд' ? styles.active : ''}`}
+            variant="text"
+            color="primary"
+            onClick={() => handleTabClick('dashboard')}
+          >
+            Дашборд
+          </Button>
+        </div>
         <div className={styles.buttonContainer}>
           <Button
             className={`${styles.button} ${activeTab === 'Рекламодатели' ? styles.active : ''}`}
@@ -60,6 +71,7 @@ export default function ClientDashboard() {
         {activeTab === 'clients' && <ClientsTable/>}
         {activeTab === 'offers' && <OffersTable/>}
         {activeTab === 'statistic' && <AdminStatisticTable/>}
+        {activeTab === 'dashboard' && <Dashboard/>}
       </div>
     </div>
   );
