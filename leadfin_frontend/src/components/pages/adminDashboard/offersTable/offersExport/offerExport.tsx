@@ -39,7 +39,7 @@ const ClientsExport: React.FC<OffersExportProps> = ({ open, onClose }) => {
   return (
     <Modal open={open} onClose={onClose}>
       <div className={styles.modalContainer}>
-        <h2>Экспорт рекламодателей в файл .CSV</h2>
+        <h2>Экспорт в файл .CSV</h2>
         <p>Выберите поля, которые хотите экспортировать:</p>
         <div className={styles.checkboxContainer}>
           {columnGroups.map((group, index) => (
