@@ -3,6 +3,7 @@ import { Card, CardContent, Container, Grid } from '@mui/material';
 import styles from './dashboard.module.css';
 import { ListWidget } from './listWidget/listWidget';
 import { StatisticWidget } from './statisticWidget/statisticWidget';
+import Chart from '../../../chart/chart';
 
 export default function Dashboard() {
   return (
@@ -23,20 +24,18 @@ export default function Dashboard() {
           <ListWidget title="Топ партнеров по офферам" items={[{ name: "Viva Events", value: "1,000.00 RUB" }]} />
         </Grid>
 
-        <Grid item xs={6}>
-          <Card variant="outlined">
-            <CardContent className={styles['chart-placeholder']}>
-              Заглушка для графика
-            </CardContent>
-          </Card>
-        </Grid>
-
         <Grid item xs={3}>
           <StatisticWidget title="Партнеры в статусе 'Active'" value={2} subtitle="За две недели" />
         </Grid>
         
         <Grid item xs={3}>
           <StatisticWidget title="Офферы в статусе 'Active'" value={14} subtitle="" />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Card variant="outlined">
+           <Chart />
+          </Card>
         </Grid>
 
       </Grid>

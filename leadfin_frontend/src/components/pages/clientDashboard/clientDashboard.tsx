@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Chart from './chart/chart';
+import Chart from '../../chart/chart';
 import Button from '@mui/material/Button';
 import styles from './clientDashboard.module.css';
 import StatisticTable from './statisticTable/statisticTable';
@@ -51,7 +51,7 @@ export default function ClientDashboard() {
         </div>
       </div>
       <div>
-        {activeTab === 'statistics' && <Chart />}
+        {activeTab === 'statistics' && <div className={styles.chartWrapper}><Chart /></div>}
         {activeTab === 'offers' && <StatisticTable />}
         {activeTab === 'export' && <Export />}
       </div>

@@ -34,15 +34,9 @@ export default function Chart() {
       </h2>
       <div className={styles.chart}>
         <LineChart
-          width={1500}
-          height={400}
+          width={1100}
+          height={300}
           data={data}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5
-          }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis

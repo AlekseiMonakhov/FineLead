@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Chart from '../clientDashboard/chart/chart';
+import Chart from '../../chart/chart';
 import Button from '@mui/material/Button';
 import styles from './adminDashboard.module.css';
 import ClientsTable from './clientsTable/clientsTable/clientsTable';
