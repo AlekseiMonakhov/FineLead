@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
 import styles from './tableHeader.module.css';
-import OfferExport from '../statisticExport/statisticExport';
+import Export from '../statisticExport/statisticExport';
 import { TableHeaderProps } from '../interfaces';
 import CustomColumnModal from '../castomColumn/customColumn';
 import GetAppIcon from '@mui/icons-material/GetApp';
@@ -36,7 +36,7 @@ function TableHeader({ onEditColumns, onAddCustomColumn }: TableHeaderProps) {
         <Button startIcon={<AddIcon />} className={styles.button} onClick={handleOpenCustomColumnModal}>
         </Button> 
       </div>
-      <OfferExport open={isOfferExportModalOpen} onClose={() => setIsOfferExportModalOpen(false)} />
+      <Export open={isOfferExportModalOpen} onClose={() => setIsOfferExportModalOpen(false)} />
       <CustomColumnModal open={isCustomColumnModalOpen} onClose={() => setIsCustomColumnModalOpen(false)} onSave={onAddCustomColumn} />
     </div>
   );
