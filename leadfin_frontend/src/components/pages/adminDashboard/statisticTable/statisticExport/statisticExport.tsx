@@ -8,7 +8,7 @@ import { columnsMapping } from '../mappers';
 import { StatisticExportProps } from '../interfaces';
 
 
-const ClientsExport: React.FC<StatisticExportProps> = ({ open, onClose }) => {
+const Export: React.FC<StatisticExportProps> = ({ open, onClose }) => {
   const [selectedColumns, setSelectedColumns] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -68,4 +68,4 @@ const ClientsExport: React.FC<StatisticExportProps> = ({ open, onClose }) => {
   );
 };
 
-export default ClientsExport;
+export default Export;
